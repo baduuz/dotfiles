@@ -7,6 +7,9 @@ super + c
 super + r
     $TERMINAL -t Scratchpad -e notepad&
 
+super + shift + r
+    feh --no-fehbg --bg-fill "$HOME/Pictures/Wallpaper/wallpaper"&
+
 super + g
 	mount_drive&
 
