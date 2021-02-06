@@ -1,7 +1,9 @@
 # dotfiles
+
 My dotfiles
 
 ## Configs for
+
 - zsh (requires spaceship prompt)
 - X display server
 - alacritty
@@ -13,6 +15,7 @@ My dotfiles
 - spotify-tui
 
 ## Installation
+
 ```
 mkdir $HOME/dotfiles
 git init --bare $HOME/dotfiles
