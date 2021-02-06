@@ -41,3 +41,4 @@ alias v=nvim
 alias dotfiles="git --git-dir=$HOME/dotfiles --work-tree=$HOME"
 
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
+pfetch
