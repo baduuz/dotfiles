@@ -1,0 +1,29 @@
+super + e
+	emoji_picker&
+
+super + c
+    $TERMINAL -t Calculator -e python -q&
+
+super + r
+    $TERMINAL -t Scratchpad -e notepad&
+
+super + g
+	mount_drive&
+
+XF86AudioMute
+	pavolume toggle&
+
+XF86AudioRaiseVolume
+	pavolume +5%&
+
+XF86AudioLowerVolume
+	pavolume -5%&
+
+XF86AudioPrev
+    playerctl -s previous&
+
+XF86AudioPlay
+    playerctl -s play-pause&
+
+XF86AudioNext
+    playerctl -s next&
