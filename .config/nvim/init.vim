@@ -28,6 +28,12 @@ endif
 let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.8 } }
 let $FZF_DEFAULT_OPTS='--reverse'
 
+let g:netrw_banner=0
+let g:netrw_liststyle=3
+let g:netrw_browse_split=4
+let g:netrw_winsize=25
+let g:netrw_altv=1
+
 let g:vimwiki_list = [{ 'path': '~/Documents/vimwiki/', 'syntax': 'markdown', 'ext': '.md' }]
 
 
@@ -50,7 +56,7 @@ nnoremap <silent> <leader>_ 	   :resize -5<CR>
 nnoremap <silent> <c-h> :tabprevious<CR>
 nnoremap <silent> <c-l> :tabnext<CR>
 " File finding
-nnoremap <silent> <leader>pv :wincmd v<bar> :Ex<bar> :vert resize 25<CR>
+nnoremap <silent> <leader>pv :Lex<CR>
 nnoremap <silent> <leader>ps :Rg<CR>
 nnoremap <silent> <c-p> :FZF<CR>
 " Git

@@ -10,7 +10,7 @@ super + r
 super + shift + r
     feh --no-fehbg --bg-fill "$HOME/Pictures/Wallpaper/wallpaper"&
 
-super + g
+super + m
 	mount_drive&
 
 XF86AudioMute
