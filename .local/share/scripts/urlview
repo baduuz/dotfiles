@@ -5,11 +5,9 @@ URLS=$(echo "$READ" | grep -Po '(((http|https|ftp|gopher)|mailto)[.:][^ >"\t]*|w
 
 URL=$(echo "$URLS" | dmenu -i -p "URL:" -l 20)
 
-[ "$URL" != "" ] && METHOD=$(printf 'Default\nVideo\nPicture\nBrave\n' | dmenu -i -p "Method:")
+[ "$URL" != "" ] && METHOD=$(printf 'Default\nVideo\nPicture\nBrave\nVideo Download\n' | dmenu -i -p "Method:")
 
-[ "$METHOD" = "Video" ] && video_async "$URL" 2>/dev/null&
+[ "$METHOD" = "Video" ] && nohup mpv "$URL" >/dev/null 2>/dev/null&
 [ "$METHOD" = "Brave" ] && nohup brave "$URL" >/dev/null 2>/dev/null&
-if [ "$METHOD" = "Picture" ];then
-    TMPFILE=$(mktemp /tmp/sxiv-online-img.XXX)
-   (nohup curl "$URL" -o $TMPFILE >/dev/null 2>/dev/null && nohup sxiv $TMPFILE >/dev/null 2>/dev/null && nohup rm $TMPFILE >/dev/null 2>/dev/null)&
-fi
+[ "$METHOD" = "Video Download" ] && nohup download_video "$URL" >/dev/null 2>/dev/null&
+[ "$METHOD" = "Picture" ] && nohup sxiv_web "$URL" >/dev/null 2>/dev/null&

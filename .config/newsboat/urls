@@ -26,6 +26,7 @@ https://www.youtube.com/feeds/videos.xml?channel_id=UCo8bcnLyZH8tBIH9V1mLgqQ "~Y
 https://www.youtube.com/feeds/videos.xml?channel_id=UCVls1GmFKf6WlTraIb_IaJg "~YouTube: DistroTube" "(YouTube)" "Linux"
 https://www.youtube.com/feeds/videos.xml?channel_id=UCvjgXvBlbQiydffZU7m1_aw "~YouTube: The Coding Train" "(YouTube)" "Coding"
 https://www.youtube.com/feeds/videos.xml?channel_id=UC4gbCGiEov1VAcOFpfGKPiA "~YouTube: Built IRL" "(YouTube)" "STEM"
+https://www.youtube.com/feeds/videos.xml?channel_id=UCg6gPGh8HU2U01vaFCAsvmQ "~YouTube: Chris Titus Tech" "(YouTube)" "Linux"
 
 "query:Reddit:tags # \"(Reddit)\"" meta
 https://www.reddit.com/r/unixporn.rss "~Reddit: /r/unixporn" "(Reddit)" "Linux"

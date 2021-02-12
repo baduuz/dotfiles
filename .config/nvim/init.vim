@@ -6,7 +6,7 @@ Plug 'gruvbox-community/gruvbox'
 Plug 'tpope/vim-surround'
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 Plug 'vim-latex/vim-latex'
-Plug 'dracula/vim'
+Plug 'tomasiser/vim-code-dark'
 
 " Git integration + File management
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -22,7 +22,7 @@ Plug 'junegunn/goyo.vim'
 call plug#end()
 
 if executable('rg')
-	let g:rg_derive_root='true'
+  let g:rg_derive_root='true'
 endif
 
 let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.8 } }
@@ -88,14 +88,21 @@ set hidden wildmenu
 " Gruvbox
 let g:gruvbox_contrast_dark="hard"
 let g:gruvbox_invert_selection='0'
-let g:airline_theme='gruvbox'
 
+let g:airline_theme='codedark'
 set termguicolors
 set background=dark
-" colo dracula
-colo gruvbox
+colo codedark
 set cursorline
+
+" Transparency
 hi! Normal ctermbg=NONE guibg=NONE
+hi! SignColumn ctermbg=NONE guibg=NONE
+hi! FoldColumn ctermbg=NONE guibg=NONE
+hi! LineNr ctermbg=NONE guibg=NONE
+hi! NonText ctermbg=NONE guibg=NONE
+hi! VertSplit ctermbg=NONE guibg=NONE
+hi! SpecialKey ctermbg=NONE guibg=NONE
 
 " COC Settings
 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
