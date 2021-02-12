@@ -1,0 +1,5 @@
+#!/bin/sh
+
+FILENAME=$(youtube-dl --get-filename "$1" -f bestvideo+bestaudio -o '%(title)s')
+
+[ "$FILENAME" != '' ] && notify-send 'Started video download' "$FILENAME" && youtube-dl "$1" -f bestvideo+bestaudio -o '~/Videos/%(title)s' && notify-send 'Succesfully downloaded' "$FILENAME" || notify-send 'Download failed' "$1"

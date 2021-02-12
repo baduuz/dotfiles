@@ -1,0 +1,5 @@
+#!/bin/sh
+
+TMPFILE=$(mktemp /tmp/sxiv-web-img.XXX)
+
+curl "$1" -o "$TMPFILE" && sxiv "$TMPFILE" && rm "$TMPFILE"
