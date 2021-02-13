@@ -12,6 +12,7 @@ elif [ "$BLOCK_BUTTON" = "1" ];then
     else
     	setxkbmap de
     fi
+    pkill -RTMIN+4 dwmblocks
 elif [ "$BLOCK_BUTTON" = "3" ];then
     CAPS=$(setxkbmap -query | grep caps:swapescape | wc -l)
     if [ "$CAPS" = 1 ];then
@@ -19,4 +20,5 @@ elif [ "$BLOCK_BUTTON" = "3" ];then
     else
         setxkbmap -option caps:swapescape
     fi
+    pkill -RTMIN+4 dwmblocks
 fi

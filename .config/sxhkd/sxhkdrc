@@ -1,5 +1,5 @@
 super + e
-	emoji_picker&
+    emoji_picker&
 
 super + c
     $TERMINAL -t Calculator -e python -q&
@@ -11,16 +11,22 @@ super + shift + r
     feh --no-fehbg --bg-fill "$HOME/Pictures/Wallpaper/wallpaper"&
 
 super + m
-	mount_drive&
+    mount_drive&
+
+super + ctrl + space
+    BLOCK_BUTTON=1 $HOME/.local/share/scripts/dwmblocks/keyboard.sh
+
+super + ctrl + shift + space
+    BLOCK_BUTTON=3 $HOME/.local/share/scripts/dwmblocks/keyboard.sh
 
 XF86AudioMute
-	pavolume toggle&
+    pavolume toggle&
 
 XF86AudioRaiseVolume
-	pavolume +5%&
+    pavolume +5%&
 
 XF86AudioLowerVolume
-	pavolume -5%&
+    pavolume -5%&
 
 XF86AudioPrev
     playerctl -s previous&

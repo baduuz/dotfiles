@@ -95,15 +95,6 @@ set background=dark
 colo codedark
 set cursorline
 
-" Transparency
-hi! Normal ctermbg=NONE guibg=NONE
-hi! SignColumn ctermbg=NONE guibg=NONE
-hi! FoldColumn ctermbg=NONE guibg=NONE
-hi! LineNr ctermbg=NONE guibg=NONE
-hi! NonText ctermbg=NONE guibg=NONE
-hi! VertSplit ctermbg=NONE guibg=NONE
-hi! SpecialKey ctermbg=NONE guibg=NONE
-
 " COC Settings
 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
 " delays and poor user experience.
