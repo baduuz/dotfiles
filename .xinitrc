@@ -50,17 +50,4 @@ fi
 
 
 
-setxkbmap -option caps:swapescape&
-
-sxhkd &
-
-dwmblocks &
-
-feh --no-fehbg --bg-fill "$HOME/Pictures/Wallpaper/wallpaper"&
-
-picom --experimental-backends&
-
-
-dunst&
-
 exec dwm
