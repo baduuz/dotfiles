@@ -13,3 +13,4 @@ export NODE_REPL_HISTORY="$XDG_DATA_HOME"/node_repl_history
 export GNUPGHOME="$XDG_DATA_HOME"/gnupg
 export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME"/java
 export TS3_CONFIG_DIR="$XDG_CONFIG_HOME/ts3client"
+export CARGO_HOME="$XDG_DATA_HOME"/cargo

@@ -5,5 +5,5 @@ export BROWSER=brave
 export PATH="$PATH:$HOME/.local/share/scripts"
 
 if [[ "$(tty)" = "/dev/tty1" ]];then
-    pgrep dwm || startx
+    pgrep awesome || startx
 fi

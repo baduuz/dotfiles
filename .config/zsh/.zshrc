@@ -1,5 +1,3 @@
-autoload -U promptinit; promptinit
-
 autoload -U colors && colors
 
 autoload -U compinit
@@ -9,19 +7,6 @@ zmodload zsh/complist
 compinit
 _comp_options+=(globdots)
 
-
-prompt spaceship
-SPACESHIP_PROMPT_ORDER=(
-    dir
-    git
-    char
-    )
-SPACESHIP_PROMPT_ADD_NEWLINE=false
-SPACESHIP_PROMPT_SEPARATE_LINE=false
-SPACESHIP_CHAR_SYMBOL=λ
-SPACESHIP_CHAR_SYMBOL_SECONDARY="❯ "
-SPACESHIP_CHAR_SUFFIX=" "
-SPACESHIP_DIR_TRUNC=1
 
 HISTSIZE=1000
 SAVEHIST=1000
@@ -40,6 +25,9 @@ alias ll="ls -Al"
 alias v=nvim
 alias dotfiles="git --git-dir=$HOME/.dotfiles --work-tree=$HOME"
 alias ssh="TERM=linux ssh"
+
+PROMPT='%F{blue}%1~ %(?.%F{green}.%F{red})λ %f'
+PROMPT2='%F{yellow}❯ %f'
 
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
 pfetch
