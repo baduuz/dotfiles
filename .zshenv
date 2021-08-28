@@ -14,3 +14,11 @@ export GNUPGHOME="$XDG_DATA_HOME"/gnupg
 export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME"/java
 export TS3_CONFIG_DIR="$XDG_CONFIG_HOME/ts3client"
 export CARGO_HOME="$XDG_DATA_HOME"/cargo
+
+#zprofile
+export TERMINAL=alacritty
+export EDITOR=nvim
+export BROWSER=brave
+
+export PATH="$PATH:$HOME/.local/share/scripts:$HOME/.local/bin"
+export DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/1000/bus"

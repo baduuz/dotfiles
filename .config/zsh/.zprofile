@@ -2,7 +2,7 @@ export TERMINAL=alacritty
 export EDITOR=nvim
 export BROWSER=brave
 
-export PATH="$PATH:$HOME/.local/share/scripts"
+export PATH="$PATH:$HOME/.local/share/scripts:$HOME/.local/bin"
 
 if [[ "$(tty)" = "/dev/tty1" ]];then
     pgrep awesome || startx

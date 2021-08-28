@@ -1,6 +1,6 @@
 #!/bin/sh
 
-EMOJI=$(cat ~/.local/share/scripts/emojis | dmenu -i -l 10 -p "Emoji:" | awk '{print $1}')
+EMOJI=$(cat ~/.local/share/scripts/emojis | rofi -dmenu -i -l 10 -p "Emoji:" | awk '{print $1}')
 
 if [ "$EMOJI" != "" ];then
 	printf "$EMOJI" | xclip -selection clipboard

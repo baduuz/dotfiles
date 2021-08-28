@@ -80,6 +80,7 @@ set nu rnu
 set incsearch ignorecase smartcase nohls
 set noswapfile nobackup nowritebackup
 set undodir=~/.config/nvim/undodir undofile
+set colorcolumn=100
 
 set scrolloff=8
 set cmdheight=2
@@ -89,10 +90,10 @@ set hidden wildmenu
 let g:gruvbox_contrast_dark="hard"
 let g:gruvbox_invert_selection='0'
 
-let g:airline_theme='codedark'
+let g:airline_theme='gruvbox'
 set termguicolors
 set background=dark
-colo codedark
+colo gruvbox
 set cursorline
 
 " COC Settings

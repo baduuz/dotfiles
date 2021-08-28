@@ -48,6 +48,7 @@ end
 home = os.getenv("HOME")
 beautiful.init(home .. "/.config/awesome/theme/theme.lua")
 
+
 -- This is used later as the default terminal and editor to run.
 terminal = "alacritty"
 editor = os.getenv("EDITOR") or "nano"
@@ -64,17 +65,14 @@ modkey = "Mod4"
 awful.layout.layouts = {
     awful.layout.suit.floating,
     awful.layout.suit.tile,
-    awful.layout.suit.tile.left,
-    awful.layout.suit.tile.bottom,
-    awful.layout.suit.tile.top,
     awful.layout.suit.fair,
-    awful.layout.suit.fair.horizontal,
+    -- awful.layout.suit.fair.horizontal,
     awful.layout.suit.spiral,
-    awful.layout.suit.spiral.dwindle,
+    -- awful.layout.suit.spiral.dwindle,
     awful.layout.suit.max,
-    awful.layout.suit.max.fullscreen,
+    -- awful.layout.suit.max.fullscreen,
     awful.layout.suit.magnifier,
-    awful.layout.suit.corner.nw,
+    -- awful.layout.suit.corner.nw,
     -- awful.layout.suit.corner.ne,
     -- awful.layout.suit.corner.sw,
     -- awful.layout.suit.corner.se,
@@ -87,12 +85,14 @@ myawesomemenu = {
    { "hotkeys", function() hotkeys_popup.show_help(nil, awful.screen.focused()) end },
    { "manual", terminal .. " -e man awesome" },
    { "edit config", editor_cmd .. " " .. awesome.conffile },
-   { "restart", awesome.restart },
-   { "quit", function() awesome.quit() end },
+   { "Restart", awesome.restart },
+   { "Quit", function() awesome.quit() end },
 }
 
 mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
-                                    { "open terminal", terminal }
+                                    { "open terminal", terminal },
+                                    { "Shutdown", function() awful.spawn("poweroff") end },
+                                    { "Reboot", function() awful.spawn("reboot") end }
                                   }
                         })
 
@@ -172,8 +172,6 @@ awful.screen.connect_for_each_screen(function(s)
     -- Each screen has its own tag table.
     awful.tag({ "1", "2", "3", "4", "5", "6", "7", "8", "9" }, s, awful.layout.layouts[1])
 
-    -- Create a promptbox for each screen
-    s.mypromptbox = awful.widget.prompt()
     -- Create an imagebox widget which will contain an icon indicating which layout we're using.
     -- We need one layoutbox per screen.
     s.mylayoutbox = awful.widget.layoutbox(s)
@@ -206,7 +204,6 @@ awful.screen.connect_for_each_screen(function(s)
             layout = wibox.layout.fixed.horizontal,
             mylauncher,
             s.mytaglist,
-            s.mypromptbox,
         },
         s.mytasklist, -- Middle widget
         { -- Right widgets
@@ -222,9 +219,9 @@ end)
 
 -- {{{ Mouse bindings
 root.buttons(gears.table.join(
-    awful.button({ }, 3, function () mymainmenu:toggle() end),
-    awful.button({ }, 4, awful.tag.viewnext),
-    awful.button({ }, 5, awful.tag.viewprev)
+-- awful.button({ }, 3, function () mymainmenu:toggle() end),
+-- awful.button({ }, 4, awful.tag.viewnext),
+-- awful.button({ }, 5, awful.tag.viewprev)
 ))
 -- }}}
 
@@ -312,35 +309,27 @@ globalkeys = gears.table.join(
               {description = "restore minimized", group = "client"}),
 
     -- Prompt
-    awful.key({ modkey },            "r",     function () awful.screen.focused().mypromptbox:run() end,
+    awful.key({ modkey },            "r",     function () awful.util.spawn_with_shell("rofi -show run") end,
               {description = "run prompt", group = "launcher"}),
 
-    awful.key({ modkey }, "x",
-              function ()
-                  awful.prompt.run {
-                    prompt       = "Run Lua code: ",
-                    textbox      = awful.screen.focused().mypromptbox.widget,
-                    exe_callback = awful.util.eval,
-                    history_path = awful.util.get_cache_dir() .. "/history_eval"
-                  }
-              end,
-              {description = "lua execute prompt", group = "awesome"}),
     -- Menubar
-    awful.key({ modkey }, "p", function() menubar.show() end,
+    awful.key({ modkey }, "p", function() awful.spawn("rofi -show drun") end,
               {description = "show the menubar", group = "launcher"}),
     -- Media Keys
     awful.key({ }, "XF86AudioRaiseVolume", function ()
-        awful.util.spawn("pavolume +5%") end),
+        awful.util.spawn("pamixer -i 5") end),
     awful.key({ }, "XF86AudioLowerVolume", function ()
-        awful.util.spawn("pavolume -5%") end),
+        awful.util.spawn("pamixer -d 5") end),
     awful.key({ }, "XF86AudioMute", function ()
-        awful.util.spawn("pavolume toggle") end),
+        awful.util.spawn("pamixer -t") end),
     awful.key({ }, "XF86AudioNext", function ()
         awful.util.spawn("playerctl next") end),
     awful.key({ }, "XF86AudioPrev", function ()
         awful.util.spawn("playerctl previous") end),
     awful.key({ }, "XF86AudioPlay", function ()
-        awful.util.spawn("playerctl play-pause") end)
+        awful.util.spawn("playerctl play-pause") end),
+    awful.key({ modkey }, "e", function ()
+        awful.util.spawn_with_shell("emoji_picker") end)
 )
 
 clientkeys = gears.table.join(
@@ -508,7 +497,10 @@ awful.rules.rules = {
 
     -- Add titlebars to normal clients and dialogs
     { rule_any = {type = { "normal", "dialog" }
-      }, properties = { titlebars_enabled = true }
+      }, properties = { titlebars_enabled = false }
+    },
+    { rule_any = { class = { "Microsoft Teams - Preview", "Nextcloud" }
+      }, properties = {titlebars_enabled = false }
     },
 
     -- Set Firefox to always map on the tag named "2" on screen 1.
@@ -539,8 +531,6 @@ client.connect_signal("request::titlebars", function(c)
     local buttons = gears.table.join(
         awful.button({ }, 1, function()
             c:emit_signal("request::activate", "titlebar", {raise = true})
-            c.maximized = false
-            c.fullscreen = false
             awful.mouse.client.move(c)
         end),
         awful.button({ }, 3, function()
@@ -584,5 +574,6 @@ end)
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
+--
 
 awful.spawn.with_shell("~/.config/awesome/autorun.sh")

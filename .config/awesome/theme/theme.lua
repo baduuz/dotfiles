@@ -14,7 +14,7 @@ local theme = {}
 theme.font          = "Sans 8.8"
 
 theme.bg_normal     = "#202020A0"
-theme.bg_focus      = "#20202000"
+theme.bg_focus      = "#505050A0"
 theme.bg_urgent     = "#12121200"
 theme.bg_minimize   = "#444444"
 theme.bg_systray    = theme.bg_normal
@@ -25,7 +25,7 @@ theme.fg_urgent     = "#ff0000"
 theme.fg_minimize   = "#ffffff"
 
 theme.useless_gap   = dpi(8)
-theme.border_width  = 0
+theme.border_width  = 2
 theme.border_normal = "#121212"
 theme.border_focus  = "#848484"
 theme.border_marked = "#91231c"
@@ -48,7 +48,7 @@ theme.bg_systray                                = "#202020"
 --theme.taglist_bg_focus = "#ff0000"
 
 -- Generate taglist squares:
-local taglist_square_size = dpi(4)
+local taglist_square_size = dpi(5)
 theme.taglist_squares_sel = theme_assets.taglist_squares_sel(
     taglist_square_size, theme.fg_normal
 )
