@@ -315,6 +315,11 @@ globalkeys = gears.table.join(
     -- Menubar
     awful.key({ modkey }, "p", function() awful.spawn("rofi -show drun") end,
               {description = "show the menubar", group = "launcher"}),
+
+  -- applications
+    awful.key({ modkey }, "e", function ()
+        awful.util.spawn("pcmanfm") end),
+
     -- Media Keys
     awful.key({ }, "XF86AudioRaiseVolume", function ()
         awful.util.spawn("pamixer -i 5") end),
@@ -328,7 +333,7 @@ globalkeys = gears.table.join(
         awful.util.spawn("playerctl previous") end),
     awful.key({ }, "XF86AudioPlay", function ()
         awful.util.spawn("playerctl play-pause") end),
-    awful.key({ modkey }, "e", function ()
+    awful.key({ modkey }, ".", function ()
         awful.util.spawn_with_shell("emoji_picker") end)
 )
 
