@@ -18,7 +18,7 @@ export CARGO_HOME="$XDG_DATA_HOME"/cargo
 #zprofile
 export TERMINAL=alacritty
 export EDITOR=nvim
-export BROWSER=brave
+export BROWSER=firefox
 
 export PATH="$PATH:$HOME/.local/share/scripts:$HOME/.local/bin"
 export DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/1000/bus"

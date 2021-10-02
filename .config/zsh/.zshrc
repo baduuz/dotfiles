@@ -25,6 +25,7 @@ alias ll="ls -Al"
 alias v=nvim
 alias dotfiles="git --git-dir=$HOME/.dotfiles --work-tree=$HOME"
 alias ssh="TERM=linux ssh"
+alias icat="kitty +kitten icat"
 
 PROMPT='%F{blue}%1~ %(?.%F{green}.%F{red})λ %f'
 PROMPT2='%F{yellow}❯ %f'

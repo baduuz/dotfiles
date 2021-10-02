@@ -1,6 +1,6 @@
 export TERMINAL=alacritty
 export EDITOR=nvim
-export BROWSER=brave
+export BROWSER=firefox
 
 export PATH="$PATH:$HOME/.local/share/scripts:$HOME/.local/bin"
 

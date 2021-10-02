@@ -18,6 +18,9 @@ local hotkeys_popup = require("awful.hotkeys_popup")
 -- when client with a matching name is opened:
 require("awful.hotkeys_popup.keys")
 
+local xresources = require("beautiful.xresources")
+local dpi = xresources.apply_dpi
+
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
@@ -45,12 +48,13 @@ end
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
-home = os.getenv("HOME")
+
+local home = os.getenv("HOME")
 beautiful.init(home .. "/.config/awesome/theme/theme.lua")
 
 
 -- This is used later as the default terminal and editor to run.
-terminal = "alacritty"
+terminal = "kitty"
 editor = os.getenv("EDITOR") or "nano"
 editor_cmd = terminal .. " -e " .. editor
 
@@ -170,7 +174,31 @@ awful.screen.connect_for_each_screen(function(s)
     set_wallpaper(s)
 
     -- Each screen has its own tag table.
-    awful.tag({ "1", "2", "3", "4", "5", "6", "7", "8", "9" }, s, awful.layout.layouts[1])
+    awful.tag.add("1", {
+        layout = awful.layout.suit.tile,
+        selected = true,
+        screen = s
+    })
+
+    awful.tag.add("2", {
+        layout = awful.layout.suit.tile,
+        screen = s
+    })
+
+    awful.tag.add("3", {
+        layout = awful.layout.suit.tile,
+        screen = s
+    })
+
+    awful.tag.add("4", {
+        layout = awful.layout.suit.tile,
+        screen = s
+    })
+
+    awful.tag.add("5", {
+        layout = awful.layout.suit.tile,
+        screen = s
+    })
 
     -- Create an imagebox widget which will contain an icon indicating which layout we're using.
     -- We need one layoutbox per screen.
@@ -182,8 +210,9 @@ awful.screen.connect_for_each_screen(function(s)
                            awful.button({ }, 5, function () awful.layout.inc(-1) end)))
     -- Create a taglist widget
     s.mytaglist = awful.widget.taglist {
-        screen  = s,
-        filter  = awful.widget.taglist.filter.all,
+        screen = s,
+        filter = awful.widget.taglist.filter.all,
+        layout = {spacing = 0, layout = wibox.layout.fixed.horizontal},
         buttons = taglist_buttons
     }
 
@@ -191,27 +220,56 @@ awful.screen.connect_for_each_screen(function(s)
     s.mytasklist = awful.widget.tasklist {
         screen  = s,
         filter  = awful.widget.tasklist.filter.currenttags,
-        buttons = tasklist_buttons
+        buttons = tasklist_buttons,
     }
 
     -- Create the wibox
     s.mywibox = awful.wibar({ position = "top", screen = s })
+
+    local powerwidget = require("widgets.powermenu_widget")
+
+    local volumewidget = wibox.widget {
+        bar_shape           = gears.shape.rounded_rect,
+        bar_height          = 10,
+        bar_color           = beautiful.bg_focus,
+        handle_color        = beautiful.fg_focus,
+        handle_shape        = gears.shape.circle,
+        handle_border_width = 0,
+        handle_height       = 10,
+        forced_width        = 100,
+        minimum             = 0,
+        maximum             = 100,
+        value               = 25,
+        widget              = wibox.widget.slider,
+    }
+
+    volumewidget:connect_signal("property::value", function()
+        awful.spawn.with_shell("pamixer --set-volume " .. volumewidget.value)
+    end)
+
+    volumewidget:connect_signal("volumechange", function()
+        awful.spawn.with_shell("notify-send \"received change\"")
+    end)
 
     -- Add widgets to the wibox
     s.mywibox:setup {
         layout = wibox.layout.align.horizontal,
         { -- Left widgets
             layout = wibox.layout.fixed.horizontal,
-            mylauncher,
             s.mytaglist,
         },
-        s.mytasklist, -- Middle widget
+        { -- Middle widget
+            s.mytasklist,
+            layout = wibox.layout.flex.horizontal,
+        },
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
             mykeyboardlayout,
             wibox.widget.systray(),
+            volumewidget,
             mytextclock,
             s.mylayoutbox,
+            powerwidget,
         },
     }
 end)
@@ -296,7 +354,7 @@ globalkeys = gears.table.join(
     awful.key({ modkey, "Shift"   }, "space", function () awful.layout.inc(-1)                end,
               {description = "select previous", group = "layout"}),
 
-    awful.key({ modkey, "Control" }, "n",
+    awful.key({ modkey, "Shift" }, "n",
               function ()
                   local c = awful.client.restore()
                   -- Focus restored client
@@ -384,7 +442,7 @@ clientkeys = gears.table.join(
 -- Bind all key numbers to tags.
 -- Be careful: we use keycodes to make it work on any keyboard layout.
 -- This should map on the top row of your keyboard, usually 1 to 9.
-for i = 1, 9 do
+for i = 1, 3 do
     globalkeys = gears.table.join(globalkeys,
         -- View tag only.
         awful.key({ modkey }, "#" .. i + 9,
@@ -431,6 +489,53 @@ for i = 1, 9 do
     )
 end
 
+for i = 8, 9 do
+    globalkeys = gears.table.join(globalkeys,
+        -- View tag only.
+        awful.key({ modkey }, "#" .. i + 9,
+                  function ()
+                        local screen = awful.screen.focused()
+                        local tag = screen.tags[i-4]
+                        if tag then
+                           tag:view_only()
+                        end
+                  end,
+                  {description = "view tag #"..i, group = "tag"}),
+        -- Toggle tag display.
+        awful.key({ modkey, "Control" }, "#" .. i + 9,
+                  function ()
+                      local screen = awful.screen.focused()
+                      local tag = screen.tags[i-4]
+                      if tag then
+                         awful.tag.viewtoggle(tag)
+                      end
+                  end,
+                  {description = "toggle tag #" .. i, group = "tag"}),
+        -- Move client to tag.
+        awful.key({ modkey, "Shift" }, "#" .. i + 9,
+                  function ()
+                      if client.focus then
+                          local tag = client.focus.screen.tags[i-4]
+                          if tag then
+                              client.focus:move_to_tag(tag)
+                          end
+                     end
+                  end,
+                  {description = "move focused client to tag #"..i, group = "tag"}),
+        -- Toggle tag on focused client.
+        awful.key({ modkey, "Control", "Shift" }, "#" .. i + 9,
+                  function ()
+                      if client.focus then
+                          local tag = client.focus.screen.tags[i-4]
+                          if tag then
+                              client.focus:toggle_tag(tag)
+                          end
+                      end
+                  end,
+                  {description = "toggle focused client on tag #" .. i, group = "tag"})
+    )
+end
+
 clientbuttons = gears.table.join(
     awful.button({ }, 1, function (c)
         c:emit_signal("request::activate", "mouse_click", {raise = true})
@@ -453,69 +558,78 @@ clientbuttons = gears.table.join(
 root.keys(globalkeys)
 -- }}}
 
+awful.rules.rules = require("rules")
 -- {{{ Rules
 -- Rules to apply to new clients (through the "manage" signal).
-awful.rules.rules = {
-    -- All clients will match this rule.
-    { rule = { },
-      properties = { border_width = beautiful.border_width,
-                     border_color = beautiful.border_normal,
-                     focus = awful.client.focus.filter,
-                     raise = true,
-                     keys = clientkeys,
-                     buttons = clientbuttons,
-                     screen = awful.screen.preferred,
-                     placement = awful.placement.center
-     }
-    },
-
-    -- Floating clients.
-    { rule_any = {
-        instance = {
-          "DTA",  -- Firefox addon DownThemAll.
-          "copyq",  -- Includes session name in class.
-          "pinentry",
-        },
-        class = {
-          "Arandr",
-          "Blueman-manager",
-          "Gpick",
-          "Kruler",
-          "MessageWin",  -- kalarm.
-          "Sxiv",
-          "Tor Browser", -- Needs a fixed window size to avoid fingerprinting by screen size.
-          "Wpa_gui",
-          "veromix",
-          "xtightvncviewer"},
-
-        -- Note that the name property shown in xprop might be set slightly after creation of the client
-        -- and the name shown there might not match defined rules here.
-        name = {
-          "Event Tester",  -- xev.
-        },
-        role = {
-          "AlarmWindow",  -- Thunderbird's calendar.
-          "ConfigManager",  -- Thunderbird's about:config.
-          "pop-up",       -- e.g. Google Chrome's (detached) Developer Tools.
-        }
-      }, properties = { floating = true }},
-
-    -- Add titlebars to normal clients and dialogs
-    { rule_any = {type = { "normal", "dialog" }
-      }, properties = { titlebars_enabled = false }
-    },
-    { rule_any = { class = { "Microsoft Teams - Preview", "Nextcloud" }
-      }, properties = {titlebars_enabled = false }
-    },
-
-    -- Set Firefox to always map on the tag named "2" on screen 1.
-    -- { rule = { class = "Firefox" },
-    --   properties = { screen = 1, tag = "2" } },
-}
+-- awful.rules.rules = {
+--     -- All clients will match this rule.
+--     { rule = { },
+--       properties = { border_width = beautiful.border_width,
+--                      border_color = beautiful.border_normal,
+--                      focus = awful.client.focus.filter,
+--                      raise = true,
+--                      keys = clientkeys,
+--                      buttons = clientbuttons,
+--                      screen = awful.screen.preferred,
+--                      placement = awful.placement.center
+--      }
+--     },
+-- 
+--     -- Floating clients.
+--     { rule_any = {
+--         instance = {
+--           "DTA",  -- Firefox addon DownThemAll.
+--           "copyq",  -- Includes session name in class.
+--           "pinentry",
+--         },
+--         class = {
+--           "Arandr",
+--           "Blueman-manager",
+--           "Gpick",
+--           "Kruler",
+--           "MessageWin",  -- kalarm.
+--           "Sxiv",
+--           "Tor Browser", -- Needs a fixed window size to avoid fingerprinting by screen size.
+--           "Wpa_gui",
+--           "veromix",
+--           "xtightvncviewer"},
+-- 
+--         -- Note that the name property shown in xprop might be set slightly after creation of the client
+--         -- and the name shown there might not match defined rules here.
+--         name = {
+--           "Event Tester",  -- xev.
+--         },
+--         role = {
+--           "AlarmWindow",  -- Thunderbird's calendar.
+--           "ConfigManager",  -- Thunderbird's about:config.
+--           "pop-up",       -- e.g. Google Chrome's (detached) Developer Tools.
+--         }
+--       }, properties = { floating = true }},
+-- 
+--     -- Add titlebars to normal clients and dialogs
+--     { rule_any = {type = { "normal", "dialog" }
+--       }, properties = { titlebars_enabled = false }
+--     },
+--     { rule_any = { class = { "Microsoft Teams - Preview", "Nextcloud" }
+--       }, properties = {titlebars_enabled = false }
+--     },
+-- 
+--     -- Set Firefox to always map on the tag named "2" on screen 1.
+--     -- { rule = { class = "Firefox" },
+--     --   properties = { screen = 1, tag = "2" } },
+-- }
 -- }}}
 
 
 -- {{{ Signals
+client.connect_signal("property::class", function(c)
+	if c.class == "Spotify" then
+		-- Move the Spotify instance to "3" tag on this screen
+		local t = awful.tag.find_by_name(awful.screen.focused(), "3")
+		c:move_to_tag(t)
+	end
+end)
+
 -- Signal function to execute when a new client appears.
 client.connect_signal("manage", function (c)
     -- Set the windows at the slave,

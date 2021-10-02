@@ -1,38 +1,33 @@
 ---------------------------
--- Default awesome theme --
+--        Theme           --
 ---------------------------
 
 local theme_assets = require("beautiful.theme_assets")
 local xresources = require("beautiful.xresources")
 local dpi = xresources.apply_dpi
 
-local gfs = require("gears.filesystem")
 local themes_path = os.getenv("HOME") .. "/.config/awesome/theme"
 
 local theme = {}
 
-theme.font          = "Sans 8.8"
+theme.font       = "sans 8.8"
 
-theme.bg_normal     = "#202020A0"
-theme.bg_focus      = "#505050A0"
-theme.bg_urgent     = "#12121200"
-theme.bg_minimize   = "#444444"
-theme.bg_systray    = theme.bg_normal
-
-theme.fg_normal     = "#ffffff"
-theme.fg_focus      = "#ffffff"
-theme.fg_urgent     = "#ff0000"
-theme.fg_minimize   = "#ffffff"
+theme.fg_normal  = "#ECEFF4"
+theme.fg_focus   = "#88C0D0"
+theme.fg_urgent  = "#D08770"
+theme.bg_normal  = "#2E3440"
+theme.bg_focus   = "#3B4252"
+theme.bg_urgent  = "#3B4252"
+theme.bg_systray = theme.bg_normal
 
 theme.useless_gap   = dpi(8)
-theme.border_width  = 2
-theme.border_normal = "#121212"
-theme.border_focus  = "#848484"
-theme.border_marked = "#91231c"
+theme.border_width  = 1
+theme.border_normal = "#3B4252"
+theme.border_focus  = "#4C566A"
+theme.border_marked = "#D08770"
 
 theme.titlebar_bg_normal                        = "#202020"
 theme.titlebar_bg_focus                         = "#404040"
-theme.bg_systray                                = "#202020"
 
 -- There are other variable sets
 -- overriding the default one when
