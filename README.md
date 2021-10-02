@@ -4,15 +4,10 @@ My dotfiles
 
 ## Configs for
 
-- zsh (requires spaceship prompt)
-- X display server
-- alacritty
-- calcurse
-- dunst
-- newsboat
+- zsh
+- Awesomewm
+- Kitty & Allacritty
 - neovim
-- sxhkd
-- spotify-tui
 
 ## Installation
 

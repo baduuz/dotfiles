@@ -1,4 +1,4 @@
-#!/bin/dash
+#!/bin/sh
 
 run() {
   if ! pgrep -f $1 ;
