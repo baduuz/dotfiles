@@ -18,6 +18,7 @@ picom
 pipewire
 pipewire-pulse
 python-pip
+ripgrep
 rofi
 sxiv
 ttf-dejavu
