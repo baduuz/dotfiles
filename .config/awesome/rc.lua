@@ -247,10 +247,6 @@ awful.screen.connect_for_each_screen(function(s)
         awful.spawn.with_shell("pamixer --set-volume " .. volumewidget.value)
     end)
 
-    volumewidget:connect_signal("volumechange", function()
-        awful.spawn.with_shell("notify-send \"received change\"")
-    end)
-
     -- Add widgets to the wibox
     s.mywibox:setup {
         layout = wibox.layout.align.horizontal,

@@ -2,6 +2,7 @@ adobe-source-sans-fonts
 arc-gtk-theme
 awesome
 capitaine-cursors
+gnome-keyring
 kitty
 lightdm
 lightdm-webkit2-greeter
@@ -11,6 +12,7 @@ mpv
 neovim
 nodejs
 npm
+pamixer
 papirus-icon-theme
 pavucontrol
 pcmanfm

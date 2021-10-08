@@ -24,8 +24,8 @@ return {
          },
     },
     {
-         rule = {
-             class = "Pcmanfm",
+         rule_any = {
+             class = { "Pcmanfm", "Pavucontrol" },
          },
          properties = {
              tag = "4"
@@ -33,7 +33,7 @@ return {
     },
     {
          rule_any = {
-             class = { "Steam", "Virt-manager", "Lutris" },
+             class = { "Steam", "Virt-manager", "Lutris", "heroic" },
          },
          properties = {
              tag = "5"
