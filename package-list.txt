@@ -19,9 +19,11 @@ pcmanfm
 picom
 pipewire
 pipewire-pulse
+playerctl
 python-pip
 ripgrep
 rofi
+slock
 sxiv
 ttf-dejavu
 ttf-fira-code
@@ -32,6 +34,9 @@ xarchiver
 xclip
 xdg-user-dirs
 xorg-server
+xorg-xinit
+xorg-xmodmap
+xorg-xrandr
 zathura
 zathura-pdf-poppler
 zip
