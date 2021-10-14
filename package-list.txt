@@ -2,6 +2,7 @@ adobe-source-sans-fonts
 arc-gtk-theme
 awesome
 capitaine-cursors
+firefox
 gnome-keyring
 kitty
 lightdm
