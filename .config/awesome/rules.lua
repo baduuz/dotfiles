@@ -25,7 +25,7 @@ return {
     },
     {
          rule_any = {
-             class = { "Pcmanfm", "Pavucontrol" },
+             class = { "Pcmanfm", "Pavucontrol", "discord" },
          },
          properties = {
              tag = "4"

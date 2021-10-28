@@ -7,6 +7,7 @@ Plug 'joshdick/onedark.vim'
 Plug 'tpope/vim-surround'
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 Plug 'vim-latex/vim-latex'
+Plug 'norcalli/nvim-colorizer.lua'
 
 " Git integration + File management
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -86,15 +87,19 @@ set scrolloff=8
 set cmdheight=2
 set hidden wildmenu
 
+set termguicolors
+set background=dark
+colo onedark
+let g:airline_theme='onedark'
+set cursorline
+
+" Nvim-colorizer
+lua require'colorizer'.setup(nil, { mode = "background"; })
+
 " Gruvbox
 let g:gruvbox_contrast_dark="hard"
 let g:gruvbox_invert_selection='0'
 
-let g:airline_theme='onedark'
-set termguicolors
-set background=dark
-colo onedark
-set cursorline
 
 " COC Settings
 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable

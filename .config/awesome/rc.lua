@@ -107,12 +107,9 @@ mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
 menubar.utils.terminal = terminal -- Set the terminal for applications that require it
 -- }}}
 
--- Keyboard map indicator and switcher
-mykeyboardlayout = awful.widget.keyboardlayout()
-
 -- {{{ Wibar
 -- Create a textclock widget
-mytextclock = wibox.widget.textclock()
+mytextclock = wibox.widget.textclock("%H:%M")
 
 -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
@@ -209,11 +206,47 @@ awful.screen.connect_for_each_screen(function(s)
                            awful.button({ }, 4, function () awful.layout.inc( 1) end),
                            awful.button({ }, 5, function () awful.layout.inc(-1) end)))
     -- Create a taglist widget
+    local hollow_circle = function(cr, width, height)
+        gears.shape.arc(cr, width, height, dpi(17), 0, math.pi*2)
+    end
+    local focus_icon = gears.surface.load_from_shape (dpi(100), dpi(100),hollow_circle,beautiful.fg_focus)
+    local unfocus_icon = gears.surface.load_from_shape (dpi(100), dpi(100),hollow_circle,beautiful.bg_focus)
+    local update_tags = function(self, c3)
+        local tagicon = self:get_children_by_id('icon_role')[1]
+        if c3.selected then
+            tagicon.image = focus_icon
+        elseif #c3:clients() == 0 then
+            tagicon.image = unfocus_icon
+        else
+            tagicon.image = unfocus_icon
+        end
+    end
     s.mytaglist = awful.widget.taglist {
         screen = s,
         filter = awful.widget.taglist.filter.all,
         layout = {spacing = 0, layout = wibox.layout.fixed.horizontal},
-        buttons = taglist_buttons
+        widget_template = {
+            {
+                {
+                    id = 'icon_role',
+                    widget = wibox.widget.imagebox
+                },
+                widget = wibox.container.margin,
+                top = dpi(3),
+                bottom = dpi(3),
+                left = dpi(3),
+                right = dpi(3)
+            },
+            id = 'background',
+            widget = wibox.widget.background,
+            update_callback = function(self, c3, index, objects)
+                update_tags(self, c3)
+            end,
+            create_callback = function(self, c3, index, objects)
+                update_tags(self, c3)
+            end
+        },
+        buttons = taglist_buttons,
     }
 
     -- Create a tasklist widget
@@ -221,31 +254,24 @@ awful.screen.connect_for_each_screen(function(s)
         screen  = s,
         filter  = awful.widget.tasklist.filter.currenttags,
         buttons = tasklist_buttons,
+        widget_template = {
+            {
+                id     = 'clienticon',
+                widget = awful.widget.clienticon,
+                forced_width = 32,
+                foced_height = 32,
+            },
+            create_callback = function(self, c, index, objects) --luacheck: no unused args
+                self:get_children_by_id('clienticon')[1].client = c
+            end,
+            layout = wibox.layout.align.vertical,
+        },
     }
 
     -- Create the wibox
-    s.mywibox = awful.wibar({ position = "top", screen = s })
+    s.mywibox = awful.wibar({ position = "top", screen = s, opacity = 0.9 })
 
     local powerwidget = require("widgets.powermenu_widget")
-
-    local volumewidget = wibox.widget {
-        bar_shape           = gears.shape.rounded_rect,
-        bar_height          = 10,
-        bar_color           = beautiful.bg_focus,
-        handle_color        = beautiful.fg_focus,
-        handle_shape        = gears.shape.circle,
-        handle_border_width = 0,
-        handle_height       = 10,
-        forced_width        = 100,
-        minimum             = 0,
-        maximum             = 100,
-        value               = 25,
-        widget              = wibox.widget.slider,
-    }
-
-    volumewidget:connect_signal("property::value", function()
-        awful.spawn.with_shell("pamixer --set-volume " .. volumewidget.value)
-    end)
 
     -- Add widgets to the wibox
     s.mywibox:setup {
@@ -256,15 +282,13 @@ awful.screen.connect_for_each_screen(function(s)
         },
         { -- Middle widget
             s.mytasklist,
-            layout = wibox.layout.flex.horizontal,
+            layout = wibox.layout.fixed.horizontal,
         },
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
-            mykeyboardlayout,
             wibox.widget.systray(),
-            volumewidget,
-            mytextclock,
             s.mylayoutbox,
+            mytextclock,
             powerwidget,
         },
     }
