@@ -1,3 +1,2 @@
-lightdm-webkit-theme-aether
 pfetch
 zsh-autocomplete-git

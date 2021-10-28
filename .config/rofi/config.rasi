@@ -1,166 +1,142 @@
-/************************************************
- * ROFI Color theme
- * User: ArcoLinux
- * Copyright: 2018 INTRCPTR
- ***********************************************/
-//----------------------
-// Configuration
-//----------------------
-
 configuration {
-	modi: 			"drun,run";
-	width: 			750;
-	lines: 			12;
-	separator-style: 	"solid";
-	hide-scrollbar: 	true;
-    show-icons:         true;
-	}
+  font:            "HackGen Console 10";
+  icon-theme:      "zafiro-icon-theme";
+  fixed-num-lines: true;
+  show-icons:      true;
+  sidebar-mode:    true;
+  scroll-method:   0;
+  window-format:   "[{w:1}] {t}";
+  click-to-exit:   true;
 
-//----------------------
-// Theme Settings 
-//----------------------
-
-//----------------------
-// Colors
-//----------------------
+  modi:           "drun,window,ssh,combi";
+  display-window: "";
+  display-run:    "";
+  display-ssh:    "";
+  display-drun:   "";
+  display-combi:  "";
+}
 
 * {
-    selected-normal-foreground:  rgba(216, 222, 233, 100%);
-    foreground:                  rgba(216, 222, 233, 100%);
-    normal-foreground:           @foreground;
-    alternate-normal-background: rgba(46, 52, 64, 100%);
-    selected-urgent-foreground:  rgba(216, 222, 233, 100%);
-    urgent-foreground:           @foreground;
-    alternate-urgent-background: rgba(46, 52, 64, 100%);
-    active-foreground:           @foreground;
-    selected-active-foreground:  @foreground;
-    alternate-active-background: rgba(46, 52, 64, 100%);
-    bordercolor:                 rgba(94, 129, 172, 100%);
-    background:                  rgba(46, 52, 64, 100%);
-    alternate-normal-foreground: @foreground;
-    normal-background:           @background;
-    selected-normal-background:  rgba(76, 86, 106, 100%);
-    border-color:                rgba(94, 129, 172, 100%);
-    spacing:                     2;
-    separatorcolor:              @blue;
-    urgent-background:           @background;
-    selected-urgent-background:  rgba(76, 86, 106, 100%);
-    alternate-urgent-foreground: @urgent-foreground;
-    background-color:            @background;
-    alternate-active-foreground: @active-foreground;
-    active-background:           @background;
-    selected-active-background:  rgba(76, 86, 106, 100%);
-}
-#window {
-    background-color: @background;
-    border:           0;
-    padding:          0;
-}
-#mainbox {
-    border:  4;
-    padding: 20;
-}
-#message {
-    border:       4px 4px 4px ;
-    border-color: @separatorcolor;
-    padding:      20 ;
-}
-#textbox {
-    text-color: @foreground;
-}
-#listview {
-    fixed-height: 0;
-    border:       2px 0px 0px ;
-    border-color: @separatorcolor;
-    spacing:      5px ;
-    scrollbar:    false;
-    padding:	  5 0 0;
-
-}
-#element {
-    border:  0;
-    padding: 5px ;
-}
-#element.normal.normal {
-    background-color: @normal-background;
-    text-color:       @normal-foreground;
-}
-#element.normal.urgent {
-    background-color: @urgent-background;
-    text-color:       @urgent-foreground;
-}
-#element.normal.active {
-    background-color: @active-background;
-    text-color:       @active-foreground;
-}
-#element.selected.normal {
-    background-color: @selected-normal-background;
-    text-color:       @selected-normal-foreground;
-}
-#element.selected.urgent {
-    background-color: @selected-urgent-background;
-    text-color:       @selected-urgent-foreground;
-}
-#element.selected.active {
-    background-color: @selected-active-background;
-    text-color:       @selected-active-foreground;
-}
-#element.alternate.normal {
-    background-color: @alternate-normal-background;
-    text-color:       @alternate-normal-foreground;
-}
-#element.alternate.urgent {
-    background-color: @alternate-urgent-background;
-    text-color:       @alternate-urgent-foreground;
-}
-#element.alternate.active {
-    background-color: @alternate-active-background;
-    text-color:       @alternate-active-foreground;
-}
-#scrollbar {
-    width:        4px ;
-    border:       0;
-    handle-color: @normal-foreground;
-    handle-width: 8px ;
-    padding:      0;
-}
-#sidebar {
-    border:       2px 0px 0px ;
-    border-color: @separatorcolor;
-}
-#button {
-    spacing:    0;
-    text-color: @normal-foreground;
-}
-#button.selected {
-    background-color: @selected-normal-background;
-    text-color:       @selected-normal-foreground;
-}
-#inputbar {
-    spacing:    0;
-    text-color: @normal-foreground;
-    padding:    1px ;
-}
-#case-indicator {
-    spacing:    0;
-    text-color: @normal-foreground;
-}
-#entry {
-    spacing:    0;
-    text-color: @normal-foreground;
-}
-#prompt {
-    spacing:    0;
-    text-color: @normal-foreground;
-}
-#inputbar {
-    spacing:    5;
-    text-color: @normal-foreground;
-    padding:    5px ;
-    border:	0 0 2;
-    border-color: @separatorcolor;
+  lightblue: #8fbcbb;
+  darkblue : #2e3440;
+  red      : #bf616a;
+  orange   : #d08770;
+  yellow   : #ebcb8b;
+  green    : #a3be8c;
+  white    : #eceff4;
+  black    : #000000;
 }
 
-/************************************************
- * Build upon the work of INTRCPTR
- ***********************************************/
+window {
+  border:           0px;
+  border-radius:    5px;
+  padding:          30px;
+  width:            30%;
+  background-color: #000000aa;
+}
+scrollbar {
+  border:       0px;
+  handle-color: @white;
+  handle-width: 8px;
+  padding:      0;
+}
+
+prompt {
+  spacing:    0;
+  border:     0;
+  text-color: @white;
+  margin: 0 5px 0 0;
+}
+textbox-prompt-colon {
+  expand:     false;
+  str:        "";
+  margin:     0px 5px 0px 0px;
+  text-color: inherit;
+}
+entry {
+  spacing:           0;
+  text-color:        @white;
+  placeholder-color: @lightblue;
+}
+case-indicator {
+  spacing:    0;
+  text-color: @fg;
+}
+inputbar {
+  spacing:    0px;
+  text-color: @fg;
+  margin:     10px 0 5px 10px;
+  children:   [ prompt,textbox-prompt-colon,entry,case-indicator ];
+}
+
+listview {
+  lines:        7;
+  columns:      1;
+  fixed-height: 0;
+  border:       0px;
+  spacing:      10px;
+  scrollbar:    false;
+  margin:       20px 0px;
+}
+
+element {
+  border:        0px;
+  border-radius: 5px;
+  padding:       10px;
+}
+element-icon {
+  margin: 0px 5px 0px 0px;
+}
+element normal.normal,
+element alternate.normal {
+  background-color: transparent;
+  text-color:       @white;
+}
+element normal.urgent,
+element alternate.urgent {
+  background-color: transparent;
+  text-color:       @red;
+}
+element normal.active,
+element alternate.active {
+  background-color: transparent;
+  text-color:       @green;
+}
+element selected.normal {
+  background-color: @lightblue;
+  text-color:       @white;
+}
+element selected.urgent {
+  background-color: @red;
+  text-color:       @white;
+}
+element selected.active {
+  background-color: @green;
+  text-color:       @white;
+}
+
+mode-switcher {
+  padding: 0px 5px;
+}
+button {
+  horizontal-align: 0.5;
+  vertical-align:   0.5;
+  background-color: @darkblue;
+  margin:           5px;
+  padding:          5px;
+  text-color:       @white;
+  border:           0px;
+  border-radius:    5px;
+}
+button selected {
+  background-color: @lightblue;
+}
+
+message {
+  border:  0px;
+  padding: 0px 10px;
+}
+textbox {
+  text-color: @white;
+}
+

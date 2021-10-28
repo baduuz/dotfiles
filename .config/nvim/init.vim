@@ -3,10 +3,10 @@ call plug#begin('~/.config/nvim/plugged')
 " Highlighting + Syntax
 Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'gruvbox-community/gruvbox'
+Plug 'joshdick/onedark.vim'
 Plug 'tpope/vim-surround'
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 Plug 'vim-latex/vim-latex'
-Plug 'tomasiser/vim-code-dark'
 
 " Git integration + File management
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -90,10 +90,10 @@ set hidden wildmenu
 let g:gruvbox_contrast_dark="hard"
 let g:gruvbox_invert_selection='0'
 
-let g:airline_theme='gruvbox'
+let g:airline_theme='onedark'
 set termguicolors
 set background=dark
-colo gruvbox
+colo onedark
 set cursorline
 
 " COC Settings

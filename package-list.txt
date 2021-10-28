@@ -7,6 +7,7 @@ gnome-keyring
 kitty
 lightdm
 lightdm-webkit2-greeter
+lightdm-webkit-theme-litarvan
 lxappearance
 lxsession
 mpv
