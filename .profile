@@ -9,6 +9,7 @@ export NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/npmrc
 export ZDOTDIR=$HOME/.config/zsh
 export CUDA_CACHE_PATH="$XDG_CACHE_HOME"/nv
 export WINEPREFIX="$XDG_DATA_HOME"/wineprefixes/default
+export GNUPGHOME="$XDG_DATA_HOME"/gnupg
 
 export TERMINAL=kitty
 export EDITOR=nvim

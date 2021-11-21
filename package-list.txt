@@ -39,7 +39,7 @@ xorg-xinit
 xorg-xmodmap
 xorg-xrandr
 zathura
-zathura-pdf-poppler
+zathura-pdf-mupdf
 zip
 zsh
 zsh-syntax-highlighting

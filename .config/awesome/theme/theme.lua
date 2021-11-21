@@ -10,7 +10,7 @@ local themes_path = os.getenv("HOME") .. "/.config/awesome/theme"
 
 local theme = {}
 
-theme.font       = "sans 8.8"
+theme.font       = "sans 9"
 
 theme.fg_normal  = "#ECEFF4"
 theme.fg_focus   = "#88C0D0"
@@ -18,12 +18,13 @@ theme.fg_urgent  = "#D08770"
 theme.bg_normal  = "#2E3440"
 theme.bg_focus   = "#3B4252"
 theme.bg_urgent  = "#3B4252"
-theme.bg_systray = theme.bg_normal
+theme.bg_systray = theme.bg_focus
+theme.systray_icon_spacing = dpi(4)
 
 theme.useless_gap   = dpi(8)
-theme.border_width  = 1
+theme.border_width  = 0
 theme.border_normal = "#3B4252"
-theme.border_focus  = "#4C566A"
+theme.border_focus  = "#ECEFF4"
 theme.border_marked = "#D08770"
 
 theme.titlebar_bg_normal                        = "#202020"

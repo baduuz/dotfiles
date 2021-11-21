@@ -6,7 +6,6 @@ Plug 'gruvbox-community/gruvbox'
 Plug 'joshdick/onedark.vim'
 Plug 'tpope/vim-surround'
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
-Plug 'vim-latex/vim-latex'
 Plug 'norcalli/nvim-colorizer.lua'
 
 " Git integration + File management
@@ -35,7 +34,7 @@ let g:netrw_browse_split=4
 let g:netrw_winsize=20
 let g:netrw_altv=1
 
-let g:vimwiki_list = [{ 'path': '~/Documents/vimwiki/', 'syntax': 'markdown', 'ext': '.md' }]
+let g:vimwiki_list = [{ 'path': '~/Documents/Wiki/', 'syntax': 'markdown', 'ext': '.md' }]
 
 
 let mapleader=' '

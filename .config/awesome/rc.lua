@@ -4,6 +4,7 @@ pcall(require, "luarocks.loader")
 
 -- Standard awesome library
 local gears = require("gears")
+local gfs = gears.filesystem
 local awful = require("awful")
 require("awful.autofocus")
 -- Widget and layout library
@@ -20,6 +21,8 @@ require("awful.hotkeys_popup.keys")
 
 local xresources = require("beautiful.xresources")
 local dpi = xresources.apply_dpi
+
+local cairo = require("lgi").cairo
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -49,8 +52,8 @@ end
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
 
-local home = os.getenv("HOME")
-beautiful.init(home .. "/.config/awesome/theme/theme.lua")
+local config_dir = gfs.get_configuration_dir()
+beautiful.init(config_dir .. "theme/theme.lua")
 
 
 -- This is used later as the default terminal and editor to run.
@@ -109,8 +112,6 @@ menubar.utils.terminal = terminal -- Set the terminal for applications that requ
 
 -- {{{ Wibar
 -- Create a textclock widget
-mytextclock = wibox.widget.textclock("%H:%M")
-
 -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
                     awful.button({ }, 1, function(t) t:view_only() end),
@@ -205,48 +206,35 @@ awful.screen.connect_for_each_screen(function(s)
                            awful.button({ }, 3, function () awful.layout.inc(-1) end),
                            awful.button({ }, 4, function () awful.layout.inc( 1) end),
                            awful.button({ }, 5, function () awful.layout.inc(-1) end)))
-    -- Create a taglist widget
-    local hollow_circle = function(cr, width, height)
-        gears.shape.arc(cr, width, height, dpi(17), 0, math.pi*2)
-    end
-    local focus_icon = gears.surface.load_from_shape (dpi(100), dpi(100),hollow_circle,beautiful.fg_focus)
-    local unfocus_icon = gears.surface.load_from_shape (dpi(100), dpi(100),hollow_circle,beautiful.bg_focus)
-    local update_tags = function(self, c3)
-        local tagicon = self:get_children_by_id('icon_role')[1]
-        if c3.selected then
-            tagicon.image = focus_icon
-        elseif #c3:clients() == 0 then
-            tagicon.image = unfocus_icon
-        else
-            tagicon.image = unfocus_icon
+
+    local taglist_widget = require("widgets.taglist")(s)
+
+    awful.spawn.with_line_callback("sh -c \"pactl subscribe | grep --line-buffered \\\"Event 'change' on sink\\\"\"", { stdout = function(line)
+            awful.spawn.easy_async_with_shell("pamixer --get-volume", function(volume)
+                awesome.emit_signal("signals::volume", volume)
+            end )
         end
-    end
-    s.mytaglist = awful.widget.taglist {
-        screen = s,
-        filter = awful.widget.taglist.filter.all,
-        layout = {spacing = 0, layout = wibox.layout.fixed.horizontal},
-        widget_template = {
-            {
-                {
-                    id = 'icon_role',
-                    widget = wibox.widget.imagebox
-                },
-                widget = wibox.container.margin,
-                top = dpi(3),
-                bottom = dpi(3),
-                left = dpi(3),
-                right = dpi(3)
-            },
-            id = 'background',
-            widget = wibox.widget.background,
-            update_callback = function(self, c3, index, objects)
-                update_tags(self, c3)
-            end,
-            create_callback = function(self, c3, index, objects)
-                update_tags(self, c3)
-            end
-        },
-        buttons = taglist_buttons,
+    })
+    awful.spawn.easy_async_with_shell("pamixer --get-volume", function(volume)
+        awesome.emit_signal("signals::volume", volume)
+    end )
+
+    local active_color = {
+        type = 'linear',
+        from = {0, 0},
+        to = {150, 50}, -- replace with w,h later
+        stops = {{0, "#00FF00"}, {0.75, "#FF0000"}}
+    }
+
+
+    local volume_widget = wibox.widget {
+        max_value = 100,
+        thickness = 2,
+        start_angle = 4.71238898, -- 2pi*3/4
+        rounded_edge = true,
+        paddings = 10,
+        colors = {active_color},
+        widget = wibox.container.arcchart
     }
 
     -- Create a tasklist widget
@@ -268,28 +256,32 @@ awful.screen.connect_for_each_screen(function(s)
         },
     }
 
-    -- Create the wibox
-    s.mywibox = awful.wibar({ position = "top", screen = s, opacity = 0.9 })
+    awesome.connect_signal("signals::volume", function (volume)
+        volume_widget.value = tonumber(volume)
+    end)
 
-    local powerwidget = require("widgets.powermenu_widget")
+    -- Create the wibox
+    s.mywibox = awful.wibar({ position = "top", screen = s, opacity = 0.9, height = dpi(32) })
+
+    local powerwidget = require("widgets.powermenu")
 
     -- Add widgets to the wibox
     s.mywibox:setup {
         layout = wibox.layout.align.horizontal,
         { -- Left widgets
+            taglist_widget,
+            require("widgets.bar_highlight")(s.mylayoutbox, {5,5,5,5}),
             layout = wibox.layout.fixed.horizontal,
-            s.mytaglist,
         },
         { -- Middle widget
             s.mytasklist,
+            -- volume_widget,
             layout = wibox.layout.fixed.horizontal,
         },
         { -- Right widgets
-            layout = wibox.layout.fixed.horizontal,
-            wibox.widget.systray(),
-            s.mylayoutbox,
-            mytextclock,
+            require("widgets.systray"),
             powerwidget,
+            layout = wibox.layout.fixed.horizontal,
         },
     }
 end)
@@ -650,6 +642,23 @@ client.connect_signal("property::class", function(c)
 	end
 end)
 
+client.connect_signal("property::instance", function(c)
+    if c.instance ~= nil then
+        local icon = menubar.utils.lookup_icon(c.instance)
+        local lower_icon = menubar.utils.lookup_icon(c.instance:lower())
+        if icon ~= nil then
+            local new_icon = gears.surface(icon)
+            c.icon = new_icon._native
+        elseif lower_icon ~= nil then
+            local new_icon = gears.surface(lower_icon)
+            c.icon = new_icon._native
+        elseif c.icon == nil then
+          local new_icon = gears.surface(menubar.utils.lookup_icon("application-default-icon"))
+          c.icon = new_icon._native
+        end
+    end
+end)
+
 -- Signal function to execute when a new client appears.
 client.connect_signal("manage", function (c)
     -- Set the windows at the slave,
@@ -710,7 +719,10 @@ client.connect_signal("mouse::enter", function(c)
     c:emit_signal("request::activate", "mouse_enter", {raise = false})
 end)
 
-client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
+client.connect_signal("focus", function(c)
+    c.border_color = beautiful.border_focus
+end)
+
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
 --
