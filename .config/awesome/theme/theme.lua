@@ -14,6 +14,7 @@ theme.font       = "sans 9"
 
 theme.fg_normal  = "#ECEFF4"
 theme.fg_focus   = "#88C0D0"
+theme.fg_secondary = "#81a1c1"
 theme.fg_urgent  = "#D08770"
 theme.bg_normal  = "#2E3440"
 theme.bg_focus   = "#3B4252"
