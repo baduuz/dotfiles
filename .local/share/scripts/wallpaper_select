@@ -1,0 +1,6 @@
+#!/bin/sh
+
+BACKGROUND_FILE="$HOME/.config/awesome/theme/background.png"
+WALLPAPER_FOLDER="$HOME/Pictures/Wallpaper"
+cp "$(sxiv -t $WALLPAPER_FOLDER -r -o | head -n1)" "$BACKGROUND_FILE" && xwallpaper --zoom "$BACKGROUND_FILE"
+

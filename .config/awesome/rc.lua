@@ -404,7 +404,12 @@ globalkeys = gears.table.join(
     awful.key({ }, "XF86AudioPlay", function ()
         awful.util.spawn("playerctl play-pause") end),
     awful.key({ modkey }, ".", function ()
-        awful.util.spawn_with_shell("emoji_picker") end)
+        awful.util.spawn_with_shell("emoji_picker") end),
+
+    awful.key({ modkey }, "b", function ()
+        awful.util.spawn("wallpaper_select") end),
+    awful.key({ modkey, "Shift" }, "s", function ()
+        awful.util.spawn("screenshot") end)
 )
 
 clientkeys = gears.table.join(
