@@ -342,7 +342,7 @@ globalkeys = gears.table.join(
         {description = "go back", group = "client"}),
 
     -- Standard program
-    awful.key({ modkey,           }, "Return", function () awful.spawn(terminal) end,
+    awful.key({ modkey, "Shift"   }, "Return", function () awful.spawn(terminal) end,
               {description = "open a terminal", group = "launcher"}),
     awful.key({ modkey, "Control" }, "r", awesome.restart,
               {description = "reload awesome", group = "awesome"}),
@@ -646,15 +646,17 @@ client.connect_signal("property::instance", function(c)
     if c.instance ~= nil then
         local icon = menubar.utils.lookup_icon(c.instance)
         local lower_icon = menubar.utils.lookup_icon(c.instance:lower())
-        if icon ~= nil then
-            local new_icon = gears.surface(icon)
-            c.icon = new_icon._native
-        elseif lower_icon ~= nil then
-            local new_icon = gears.surface(lower_icon)
-            c.icon = new_icon._native
-        elseif c.icon == nil then
-          local new_icon = gears.surface(menubar.utils.lookup_icon("application-default-icon"))
-          c.icon = new_icon._native
+        if c.icon == nil then
+            if icon ~= nil then
+                local new_icon = gears.surface(icon)
+                c.icon = new_icon._native
+            elseif lower_icon ~= nil then
+                local new_icon = gears.surface(lower_icon)
+                c.icon = new_icon._native
+            else
+                local new_icon = gears.surface(menubar.utils.lookup_icon("application-default-icon"))
+                c.icon = new_icon._native
+            end
         end
     end
 end)

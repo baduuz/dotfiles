@@ -22,9 +22,9 @@ theme.bg_systray = theme.bg_focus
 theme.systray_icon_spacing = dpi(4)
 
 theme.useless_gap   = dpi(8)
-theme.border_width  = 0
+theme.border_width  = 3
 theme.border_normal = "#3B4252"
-theme.border_focus  = "#ECEFF4"
+theme.border_focus  = "#81a1c1"
 theme.border_marked = "#D08770"
 
 theme.titlebar_bg_normal                        = "#202020"
