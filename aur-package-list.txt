@@ -1,3 +1,0 @@
-pfetch
-picom-ibhagwan-git
-zsh-autocomplete-git

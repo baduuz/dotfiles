@@ -33,6 +33,9 @@ vim.opt.wildmenu = true
 
 vim.opt.updatetime = 50
 
+vim.opt.foldmethod = "indent"
+vim.opt.foldlevelstart = 99
+
 vim.g.mapleader = " "
 
 vim.g.netrw_banner = 0

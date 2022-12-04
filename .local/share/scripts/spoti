@@ -1,9 +1,0 @@
-#!/bin/sh
-killall -q spotifyd
-spotifyd
-if [ "$TERM" = "linux" ];then
-    $TERMINAL -t Spotify -e spt
-else
-    spt
-fi
-killall -q spotifyd

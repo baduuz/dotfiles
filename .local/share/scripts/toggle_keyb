@@ -1,0 +1,4 @@
+#/bin/sh
+
+setxkbmap $@
+xmodmap -e "keycode 195 = BackSpace"

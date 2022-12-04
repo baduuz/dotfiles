@@ -3,11 +3,12 @@
 READ=$(cat)
 URLS=$(echo "$READ" | grep -Po '(((http|https|ftp|gopher)|mailto)[.:][^ >"\t]*|www\.[-a-z0-9.]+)[^ .,;\t>">\):]' | uniq)
 
-URL=$(echo "$URLS" | dmenu -i -p "URL:" -l 20)
+URL=$(echo "$URLS" | dmenu -p "URL:" -l 20 -i -F)
 
-[ "$URL" != "" ] && METHOD=$(printf 'Default\nVideo\nPicture\nBrave\nVideo Download\n' | dmenu -i -p "Method:")
+[ "$URL" != "" ] && METHOD=$(printf 'Browser\nVideo\nDownload Video\nPicture\nBookmark\n' | dmenu -i -F -p "Method:")
 
-[ "$METHOD" = "Video" ] && nohup mpv "$URL" >/dev/null 2>/dev/null&
-[ "$METHOD" = "Brave" ] && nohup brave "$URL" >/dev/null 2>/dev/null&
-[ "$METHOD" = "Video Download" ] && nohup download_video "$URL" >/dev/null 2>/dev/null&
-[ "$METHOD" = "Picture" ] && nohup sxiv_web "$URL" >/dev/null 2>/dev/null&
+[ "$METHOD" = "Video" ] && mpv "$URL"
+[ "$METHOD" = "Download Video" ] && download_video "$URL" >/dev/null 2>/dev/null&
+[ "$METHOD" = "Browser" ] && $BROWSER "$URL"
+[ "$METHOD" = "Picture" ] && sxiv_web "$URL"
+[ "$METHOD" = "Bookmark" ] && echo "$URL" >> "$XDG_CONFIG_HOME/bookmarks"

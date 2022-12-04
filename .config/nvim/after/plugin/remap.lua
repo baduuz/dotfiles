@@ -9,3 +9,7 @@ nnoremap("<leader>s", ":wincmd s<bar> :wincmd j<CR>")
 nnoremap("<leader>v", ":wincmd v<bar> :wincmd l<CR>")
 
 nnoremap("<leader>pv", ":Lex<CR>")
+nnoremap("<C-p>", ":Telescope find_files<CR>")
+nnoremap("<leader>ps", ":Telescope live_grep<CR>")
+nnoremap("<leader>pb", ":Telescope buffers<CR>")
+nnoremap("<leader>m", ":silent !make<CR>")

@@ -1,0 +1,6 @@
+#!/bin/sh
+
+BOOKMARK=$(cat "$XDG_CONFIG_HOME/bookmarks" | dmenu -p "Select a bookmark: " -i -F)
+[ -z "$BOOKMARK" ] && exit
+
+xdg-open "$BOOKMARK"
