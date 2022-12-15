@@ -1,0 +1,34 @@
+#!/bin/sh
+
+userresources=$XDG_CONFIG_HOME/X11/xresources
+usermodmap=$HOME/.Xmodmap
+sysresources=/etc/X11/xinit/.Xresources
+sysmodmap=/etc/X11/xinit/.Xmodmap
+
+# merge in defaults and keymaps
+
+if [ -f $sysresources ]; then
+    xrdb -merge $sysresources
+fi
+
+if [ -f $sysmodmap ]; then
+    xmodmap $sysmodmap
+fi
+
+if [ -f "$userresources" ]; then
+    xrdb -merge "$userresources"
+fi
+
+if [ -f "$usermodmap" ]; then
+    xmodmap "$usermodmap"
+fi
+
+
+picom&
+udiskie&
+setxkbmap us -option caps:swapescape
+razercommander -q
+xmodmap -e "keycode 195 = BackSpace"
+xwallpaper --zoom "$HOME/.config/wall"
+dunst&
+slstatus&
