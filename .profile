@@ -20,11 +20,15 @@ export TEXMFVAR=$XDG_CACHE_HOME/texlive/texmf-var
 export TEXMFCONFIG=$XDG_CONFIG_HOME/texlive/texmf-config
 export XCURSOR_PATH=/usr/share/icons:${XDG_DATA_HOME}/icons
 export ELINKS_CONFDIR="$XDG_CONFIG_HOME"/elinks
+export NOTMUCH_CONFIG="$XDG_CONFIG_HOME/notmuch/config"
+export PASSWORD_STORE_DIR="$XDG_DATA_HOME/pass"
 
 
 export TERMINAL=st
 export EDITOR=nvim
 export BROWSER=firefox
+
+export LC_TIME=de_DE.UTF-8
 
 export PATH="$PATH:$HOME/.local/share/scripts:$HOME/.local/bin"
 

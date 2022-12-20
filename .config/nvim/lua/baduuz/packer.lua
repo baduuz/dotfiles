@@ -35,5 +35,6 @@ return require('packer').startup(function(use)
 	use 'tikhomirov/vim-glsl'
 	use 'junegunn/goyo.vim'
 	use 'davidbeckingsale/writegood.vim'
-	-- use 'vimwiki/vimwiki'
+
+	use 'renerocksai/telekasten.nvim'
 end)
