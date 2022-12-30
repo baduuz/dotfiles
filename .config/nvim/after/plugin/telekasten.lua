@@ -28,7 +28,7 @@ require('telekasten').setup({
     -- "uuid" - Use uuid
     -- "uuid-title" - Prefix title by uuid
     -- "title-uuid" - Suffix title with uuid
-    new_note_filename = "title-uuid",
+    new_note_filename = "title",
     -- file uuid type ("rand" or input for os.date()")
     uuid_type = "%Y%m%d%H%M",
     -- UUID separator
@@ -126,12 +126,6 @@ require('telekasten').setup({
     rename_update_links = true,
 
     vaults = {
-        vault2 = {
-            -- alternate configuration for vault2 here. Missing values are defaulted to
-            -- default values from telekasten.
-            -- e.g.
-            -- home = "/home/user/vaults/personal",
-        },
     },
 
     -- how to preview media files
@@ -158,7 +152,7 @@ local function autocmd_nnoremap(key, fn)
 	vim.api.nvim_create_autocmd("BufRead", {
 		pattern = home .. "/*",
 		callback = function()
-			nnoremap(key, fn, {})
+			nnoremap(key, fn, {noremap = true, buffer = true})
 		end,
 		group = tkGrp,
 	})
@@ -168,7 +162,7 @@ local function autocmd_inoremap(key, fn)
 	vim.api.nvim_create_autocmd("BufRead", {
 		pattern = home .. "/*",
 		callback = function()
-			inoremap(key, fn, {})
+			inoremap(key, fn, {noremap = true, buffer = true})
 		end,
 		group = tkGrp,
 	})
@@ -179,11 +173,12 @@ autocmd_nnoremap("<C-l>", require('telekasten').insert_link)
 autocmd_inoremap("<C-l>", require('telekasten').insert_link)
 autocmd_nnoremap("<C-s>", require('telekasten').search_notes)
 autocmd_nnoremap("<C-f>", require('telekasten').find_notes)
+autocmd_nnoremap("<leader>zl", function() require('telekasten').insert_link({with_live_grep = true}) end)
 
+nnoremap("<leader>zz", function() require('telekasten').find_notes({with_live_grep = true}) end)
 nnoremap("<leader>zn", require('telekasten').new_note)
 nnoremap("<leader>zN", require('telekasten').new_templated_note)
 nnoremap("<leader>zy", require('telekasten').yank_notelink)
 nnoremap("<leader>zb", require('telekasten').show_backlinks)
-nnoremap("<leader>zF", require('telekasten').find_friends)
-nnoremap("<leader>zi", require('telekasten').insert_link)
+nnoremap("<leader>zf", require('telekasten').find_friends)
 nnoremap("<leader>z", require('telekasten').panel)
