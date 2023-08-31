@@ -13,3 +13,5 @@ nnoremap("<C-p>", ":Telescope find_files<CR>")
 nnoremap("<leader>ps", ":Telescope live_grep<CR>")
 nnoremap("<leader>pb", ":Telescope buffers<CR>")
 nnoremap("<leader>m", ":silent !make<CR>")
+
+nnoremap("<leader>wt", ":lua require'telescope.builtin'.live_grep{cwd='~/Documents/brain'}<CR>")

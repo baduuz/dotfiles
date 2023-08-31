@@ -23,12 +23,16 @@ if [ -f "$usermodmap" ]; then
     xmodmap "$usermodmap"
 fi
 
+USERXSESSION="$XDG_CACHE_HOME/X11/xsession"
+USERXSESSIONRC="$XDG_CACHE_HOME/X11/xsessionrc"
+ALTUSERXSESSION="$XDG_CACHE_HOME/X11/Xsession"
+ERRFILE="$XDG_CACHE_HOME/X11/xsession-errors"
 
 picom&
 udiskie&
 setxkbmap us -option caps:swapescape
-razercommander -q
 xmodmap -e "keycode 195 = BackSpace"
 xwallpaper --zoom "$HOME/.config/wall"
 dunst&
 slstatus&
+redshift&

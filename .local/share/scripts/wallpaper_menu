@@ -1,7 +1,0 @@
-#!/bin/sh
-
-BACKGROUND_FILE="$XDG_CONFIG_HOME/wall"
-BACKGROUND_FILE_OLD="$XDG_CONFIG_HOME/wall.old"
-WALLPAPER_FOLDER="$HOME/Pictures/Wallpaper /usr/share/backgrounds"
-cp "$(sxiv -t $WALLPAPER_FOLDER -r -o | head -n1)" "$BACKGROUND_FILE" && xwallpaper --zoom "$BACKGROUND_FILE"
-cp "$BACKGROUND_FILE" "$BACKGROUND_FILE_OLD"

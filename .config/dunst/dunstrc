@@ -86,20 +86,20 @@
 
     # Defines width in pixels of frame around the notification window.
     # Set to 0 to disable.
-    frame_width = 3
+    frame_width = 2
 
     # Defines color of the frame around the notification window.
     # Gruvbox
-    frame_color = "#98971a"
-	highlight   = "#98971a"
-    background  = "#1d2021"
-    foreground  = "#ebdbb2"
+    # frame_color = "#98971a"
+	# highlight   = "#98971a"
+    # background  = "#1d2021"
+    # foreground  = "#ebdbb2"
 
 	# Nord
-	# frame_color = "#bf616a"
-	# highlight   = "#bf616a"
-    # background  = "#2e3440"
-    # foreground  = "#d8dee9"
+	frame_color = "#81a1c1"
+	highlight   = "#81a1c1"
+    background  = "#2e3440"
+    foreground  = "#d8dee9"
 
     # Size of gap to display between notifications - requires a compositor.
     # If value is greater than 0, separator_height will be ignored and a border
@@ -330,12 +330,12 @@
 
 [urgency_critical]
 	# Gruvbox
-	foreground = "#fb4934"
-	frame_color = "#cc241d"
+	# foreground = "#fb4934"
+	# frame_color = "#cc241d"
 
 	# Nord
-    # foreground = "#bf616a"
-    # frame_color = "#bf616a"
+    foreground = "#d08770"
+    frame_color = "#d08770"
 
     timeout = 0
     # Icon for notifications with critical urgency, uncomment to enable

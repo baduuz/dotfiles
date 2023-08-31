@@ -53,6 +53,13 @@ preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
 
 export REFER="$HOME/Documents/Wiki/bib.ref"
 
+vicd() {
+	dst="$(vifm --choose-dir - . .)"
+	if [ -z "$dst" ];then
+	fi
+	cd "$dst"
+}
+
 alias rm="rm -iv"
 alias mv="mv -iv"
 alias cp="cp -iv"

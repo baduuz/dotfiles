@@ -22,15 +22,20 @@ export XCURSOR_PATH=/usr/share/icons:${XDG_DATA_HOME}/icons
 export ELINKS_CONFDIR="$XDG_CONFIG_HOME"/elinks
 export NOTMUCH_CONFIG="$XDG_CONFIG_HOME/notmuch/config"
 export PASSWORD_STORE_DIR="$XDG_DATA_HOME/pass"
+export W3M_DIR="$XDG_STATE_HOME/w3m"
+export PYTHONPYCACHEPREFIX="$XDG_CACHE_HOME/python"
+export PYTHONUSERBASE="$XDG_DATA_HOME/python"
+#export XAUTHORITY="$XDG_RUNTIME_DIR"/Xauthority
 
 
 export TERMINAL=st
 export EDITOR=nvim
-export BROWSER=firefox
+export BROWSER=librewolf
 
 export LC_TIME=de_DE.UTF-8
+export QT_QPA_PLATFORMTHEME=qt5ct
 
-export PATH="$PATH:$HOME/.local/share/scripts:$HOME/.local/bin"
+export PATH="$PATH:$HOME/.local/scripts:$HOME/.local/bin"
 
 if [[ "$(tty)" = "/dev/tty1" ]];then
     pgrep awesome || startx

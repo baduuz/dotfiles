@@ -34,7 +34,15 @@ return require('packer').startup(function(use)
 	}
 	use 'tikhomirov/vim-glsl'
 	use 'junegunn/goyo.vim'
+	use 'junegunn/limelight.vim'
 	use 'davidbeckingsale/writegood.vim'
 
-	use 'renerocksai/telekasten.nvim'
+	use {
+		'vimwiki/vimwiki',
+		config = function ()
+			vim.g.vimwiki_list = {
+				{path = '~/Documents/brain/', syntax = 'markdown', ext = '.md', auto_tags = 1}
+			}
+		end
+	}
 end)
