@@ -1,0 +1,96 @@
+// Variables
+* {
+	background:   #1d2021a0;
+	selected:     #3c3836a0;
+	foreground:   #ebdbb2;
+	gray:         #a89984;
+
+	highlight:    #83a598;
+	urgent:       #cc241d;
+	active:       #98971a;
+
+	radius:       10px;
+	border-width: 2px;
+}
+
+// Top-Level
+* {
+	background-color: transparent;
+	text-color:       @foreground;
+}
+
+window {
+	width:            600px;
+	padding:          15px;
+	background-color: @background;
+	border:           2px;
+	border-color:     @highlight;
+	border-radius:    @radius;
+}
+
+mainbox {
+	spacing: 10;
+}
+
+// Search Bar
+inputbar {
+	padding:    1px;
+	spacing:    0px;
+	children:   [ "prompt", "entry"];
+}
+
+prompt { margin: 0px 10px 0px 5px; }
+
+entry {
+	cursor:            text;
+	spacing:           0px;
+	placeholder-color: @gray;
+	placeholder:       "Search";
+}
+
+// Warnings
+message {
+	padding:      8px ;
+	border-color: @highlight;
+	border:       2px 0px 0px 0px;
+}
+textbox {
+	text-color: @urgent;
+}
+
+// App list
+listview {
+	padding:      8px 0px 0px 0px;
+	scrollbar:    false;
+	border-color: @highlight;
+	spacing:      2px;
+	fixed-height: 0;
+	border:       2px 0px 0px 0px;
+	lines:        7;
+}
+
+element {
+	padding: 8px;
+	cursor:  pointer;
+	spacing: 15px;
+	border:  0;
+}
+
+element-icon {
+	size: 32px;
+}
+
+element normal        { background-color: transparent; }
+element normal.normal { text-color:       @foreground; }
+element normal.urgent { text-color:       @urgent;     }
+element normal.active { text-color:       @active;     }
+
+element selected        { background-color: @selected;   }
+element selected.normal { text-color:       @foreground; }
+element selected.urgent { text-color:       @urgent;     }
+element selected.active { text-color:       @active;     }
+
+element alternate        { background-color: transparent; }
+element alternate.normal { text-color:       @foreground; }
+element alternate.urgent { text-color:       @urgent;     }
+element alternate.active { text-color:       @active;     }

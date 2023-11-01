@@ -1,0 +1,15 @@
+configuration {
+	font: "DejaVu Sans 12";
+    show-icons: true;
+	terminal: "kitty";
+	scroll-method: 0;
+
+	modes: [drun,run];
+
+	display-drun: " ";
+	drun-match-fields: [name,generic,categories,keywords];
+
+	display-run: "";
+}
+
+@theme "theme"
