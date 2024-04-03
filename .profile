@@ -2,10 +2,12 @@ export XDG_DATA_HOME=${XDG_DATA_HOME:="$HOME/.local/share"}
 export XDG_CACHE_HOME=${XDG_CACHE_HOME:="$HOME/.cache"}
 export XDG_CONFIG_HOME=${XDG_CONFIG_HOME:="$HOME/.config"}
 export XDG_STATE_HOME=${XDG_STATE_HOME:="$HOME/.local/state"}
+export XDG_DATA_DIRS="$XDG_DATA_DIRS:$HOME/.local/share/flatpak/exports/share/"
 
 export LESSHISTFILE=-
 export GTK2_RC_FILES="$XDG_CONFIG_HOME"/gtk-2.0/gtkrc
 export QT_QPA_PLATFORMTHEME=qt5ct
+export QT_QPA_PLATFORM_PLUGIN=qt5ct
 export NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/npmrc
 export ZDOTDIR=$HOME/.config/zsh
 export CUDA_CACHE_PATH="$XDG_CACHE_HOME"/nv
@@ -27,16 +29,20 @@ export PYTHONPYCACHEPREFIX="$XDG_CACHE_HOME/python"
 export PYTHONUSERBASE="$XDG_DATA_HOME/python"
 #export XAUTHORITY="$XDG_RUNTIME_DIR"/Xauthority
 
+alias nvidia-settings --config="$XDG_CONFIG_HOME"/nvidia/settings
 
-export TERMINAL=st
+
+export TERMINAL=kitty
 export EDITOR=nvim
-export BROWSER=librewolf
+export BROWSER=brave
 
+export LANG=en_US.UTF-8
 export LC_TIME=de_DE.UTF-8
+
 export QT_QPA_PLATFORMTHEME=qt5ct
 
 export PATH="$PATH:$HOME/.local/scripts:$HOME/.local/bin"
 
 if [[ "$(tty)" = "/dev/tty1" ]];then
-    pgrep awesome || startx
+    pgrep Hyprland || dbus-run-session Hyprland
 fi

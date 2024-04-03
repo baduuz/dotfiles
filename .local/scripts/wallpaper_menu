@@ -2,4 +2,10 @@
 
 BACKGROUND_FILE="$XDG_CONFIG_HOME/wall"
 WALLPAPER_FOLDER="$HOME/Pictures/Wallpaper"
-cp "$(sxiv -t $WALLPAPER_FOLDER -r -o | head -n1)" "$BACKGROUND_FILE" && xwallpaper --zoom "$BACKGROUND_FILE"
+FILE="$(sxiv -t $WALLPAPER_FOLDER -r -o | head -n1)"
+MONITOR="$(hyprctl monitors | awk '/Monitor/ {print $2}' | head -n1)"
+ln -sf "$FILE" "$BACKGROUND_FILE"
+echo file: "$FILE"
+echo monitor: "$MONITOR"
+hyprctl hyprpaper preload "$BACKGROUND_FILE"
+hyprctl hyprpaper wallpaper "$MONITOR,$BACKGROUND_FILE"

@@ -66,10 +66,11 @@ alias cp="cp -iv"
 alias grep="grep --color=auto"
 alias ls="ls --color=auto"
 alias ll="ls -Ahl"
-alias v=nvim
-alias c=clear
+alias v="nvim"
 alias dotfiles="git --git-dir=$HOME/.dotfiles --work-tree=$HOME"
 alias ssh="TERM=xterm ssh"
+alias ts="tmux-sessionizer"
+alias ta="tmux attach"
 
 PROMPT='%F{blue}%1~ %(?.%F{green}.%F{red})λ %f'
 PROMPT2='%F{yellow}❯ %f'

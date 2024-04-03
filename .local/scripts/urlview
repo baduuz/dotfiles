@@ -1,11 +1,13 @@
 #!/bin/sh
 
+MENU="fzf"
+
 READ=$(cat)
 URLS=$(echo "$READ" | grep -Po '(((http|https|ftp|gopher)|mailto)[.:][^ >"\t]*|www\.[-a-z0-9.]+)[^ .,;\t>">\):]' | uniq)
 
-URL=$(echo "$URLS" | dmenu -p "URL:" -l 20 -i -F)
+URL=$(echo "$URLS" | fzf --prompt="URL:")
 
-[ "$URL" != "" ] && METHOD=$(printf 'Browser\nVideo\nDownload Video\nPicture\nBookmark\n' | dmenu -i -F -p "Method:")
+[ "$URL" != "" ] && METHOD=$(printf 'Browser\nVideo\nDownload Video\nPicture\nBookmark\n' | fzf --prompt="Method:")
 
 [ "$METHOD" = "Video" ] && mpv "$URL"
 [ "$METHOD" = "Download Video" ] && download_video "$URL" >/dev/null 2>/dev/null&
