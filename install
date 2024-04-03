@@ -1,5 +1,5 @@
 #!/bin/sh
 
 CONFIGURATIONS="general scripts hyprland"
-stow -v -D $CONFIGURATIONS
-stow -v $CONFIGURATIONS
+stow -v -D --target="$HOME" $CONFIGURATIONS
+stow -v --target="$HOME" $CONFIGURATIONS
