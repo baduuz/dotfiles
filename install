@@ -1,4 +1,5 @@
 #!/bin/sh
 
 CONFIGURATIONS="general scripts hyprland"
-stow $CONFIGURATIONS
+stow -v -D $CONFIGURATIONS
+stow -v $CONFIGURATIONS
