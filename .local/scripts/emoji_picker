@@ -1,8 +1,0 @@
-#!/bin/sh
-
-EMOJI=$(cat ~/.local/share/scripts/emojis | dmenu -c -F -i -l 20 -bw 2 -p "Emoji:" | awk '{print $1}')
-
-if [ "$EMOJI" != "" ];then
-	printf "$EMOJI" | xclip -selection clipboard
-	notify-send "Copied! $EMOJI"
-fi

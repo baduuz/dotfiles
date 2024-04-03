@@ -1,3 +1,0 @@
-#!/bin/sh
-
-minitimer "00:$(printf '' | dmenu -p 'Set a time (in m)'):00" && notify-send -u critical "Timer" "Timer elapsed" && paplay "/usr/share/sounds/freedesktop/stereo/alarm-clock-elapsed.oga"

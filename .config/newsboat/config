@@ -1,0 +1,57 @@
+# reloading
+auto-reload yes
+reload-time 30
+reload-threads 10
+download-retries 4
+download-timeout 10
+prepopulate-query-feeds yes
+
+# display
+color listnormal cyan default
+color listfocus black yellow standout bold
+color listnormal_unread blue default
+color listfocus_unread yellow default bold
+color info red black bold
+color article white default bold
+
+text-width 80
+ignore-mode "download"
+
+highlight all "===.*===" yellow
+highlight feedlist ".*(0/0))" black
+highlight article "(^Feed:.*|^Title:.*|^Author:.*)" cyan default bold
+highlight article "(^Link:.*|^Date:.*)" default default
+highlight article "https?://[^ ]+" green default
+highlight article "^(Title):.*$" blue default
+highlight article "\\[[0-9][0-9]*\\]" magenta default bold
+highlight article "\\[image\\ [0-9]+\\]" green default bold
+highlight article "\\[embedded flash: [0-9][0-9]*\\]" green default bold
+highlight article ":.*\\(link\\)$" cyan default
+highlight article ":.*\\(image\\)$" blue default
+highlight article ":.*\\(embedded flash\\)$" magenta default
+
+# navigation
+bind-key ; macro-prefix
+
+bind-key j down
+bind-key J next-feed articlelist
+bind-key k up
+bind-key K prev-feed articlelist
+bind-key h quit
+bind-key l open
+bind-key g home
+bind-key G end
+bind-key d pagedown
+bind-key u pageup
+bind-key c toggle-show-read-feeds
+bind-key U show-urls
+
+confirm-exit yes
+cleanup-on-quit no
+
+external-url-viewer "urlview"
+
+macro y set browser "mpv %u" ; open-in-browser ; set browser "xdg-open %u"
+macro w set browser "brave %u" ; open-in-browser ; set browser "xdg-open %u"
+
+browser "xdg-open %u"
