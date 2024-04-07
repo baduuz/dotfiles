@@ -1,5 +1,9 @@
 #!/bin/sh
 
 CONFIGURATIONS="general scripts hyprland"
-stow -v -D --target="$HOME" $CONFIGURATIONS
-stow -v --target="$HOME" $CONFIGURATIONS
+
+if [ "$1" = "clean" ];then
+    stow -v --target="$HOME" --delete */
+else
+    stow -v --target="$HOME" --restow $CONFIGURATIONS
+fi
