@@ -2,6 +2,7 @@
 @define-color light-bg-color #a6a69c;
 @define-color fg-color #c8c093;
 @define-color highlight-color #8ba4b0;
+@define-color secondary-color #8a9a7b;
 @define-color urgent-color #c4746e;
 
 
@@ -26,6 +27,11 @@ button:hover {
 
 #workspaces button {
     padding: 0 5px;
+    box-shadow: inset 0 -3px @secondary-color;
+}
+
+#workspaces button.empty {
+    box-shadow: none;
 }
 
 #workspaces button:hover {
@@ -37,7 +43,7 @@ button:hover {
 }
 
 #workspaces button.urgent {
-    background-color: @urgent-color;
+    box-shadow: inset 0 -3px @urgent-color;
 }
 
 #clock,
