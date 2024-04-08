@@ -1,16 +1,16 @@
 #!/bin/sh
 
-MENU="fzf"
+URL=$(cat | grep -Po '(((http|https|ftp|gopher)|mailto)[.:][^ >"\t]*|www\.[-a-z0-9.]+)[^ .,;\t>">\):]' | uniq | fzf --prompt="url:")
+[ -z "$URL" ] && exit 0
 
-READ=$(cat)
-URLS=$(echo "$READ" | grep -Po '(((http|https|ftp|gopher)|mailto)[.:][^ >"\t]*|www\.[-a-z0-9.]+)[^ .,;\t>">\):]' | uniq)
+METHOD=$(printf 'Browser\nVideo\nDownload Video\nPicture\n' | fzf --prompt='method:')
 
-URL=$(echo "$URLS" | fzf --prompt="URL:")
-
-[ "$URL" != "" ] && METHOD=$(printf 'Browser\nVideo\nDownload Video\nPicture\nBookmark\n' | fzf --prompt="Method:")
-
-[ "$METHOD" = "Video" ] && mpv "$URL"
-[ "$METHOD" = "Download Video" ] && download_video "$URL" >/dev/null 2>/dev/null&
-[ "$METHOD" = "Browser" ] && $BROWSER "$URL"
-[ "$METHOD" = "Picture" ] && sxiv_web "$URL"
-[ "$METHOD" = "Bookmark" ] && echo "$URL" >> "$XDG_CONFIG_HOME/bookmarks"
+if [ "$METHOD" = 'Video' ];then
+    mpv "$URL"
+elif [ "$METHOD" = 'Download Video' ];then
+    download-video "$URL"
+elif [ "$METHOD" = 'Browser' ];then
+    $BROWSER "$URL"
+elif [ "$METHOD" = 'Picture' ];then
+    curl -sSL "$URL" | imv -
+fi

@@ -1,3 +1,0 @@
-#!/bin/sh
-
-import "Pictures/Screenshots/$(date +%H_%M_%S-%d_%m_%Y).png"

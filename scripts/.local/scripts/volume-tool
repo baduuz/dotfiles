@@ -1,0 +1,29 @@
+#!/bin/sh
+
+MAX_VOLUME='100'
+
+get_volume() {
+    pactl get-sink-volume @DEFAULT_SINK@ | grep -o '[0-9]*%' | head -n1 | tr -d %
+}
+
+if [ "$#" -eq 0 ];then
+    get_volume
+    exit 0
+fi
+
+if [ "$1" = 'mute' ];then
+    pactl set-sink-mute @DEFAULT_SINK@ toggle
+else
+    pactl set-sink-volume @DEFAULT_SINK@ "$1"
+fi
+
+VOLUME="$(get_volume)"
+[ "$VOLUME" -gt "$MAX_VOLUME" ] && pactl set-sink-volume @DEFAULT_SINK@ "$MAX_VOLUME"% && VOLUME="$MAX_VOLUME"
+
+if [ "$(pactl get-sink-mute @DEFAULT_SINK@)" = 'Mute: yes' ];then
+    IS_MUTE=''
+else
+    IS_MUTE=' (muted)'
+fi
+
+notify-send -u low "Volume $VOLUME%$IS_MUTE" -h "int:value:$VOLUME" -h 'string:x-canonical-private-synchronous:volume-notification' --transient

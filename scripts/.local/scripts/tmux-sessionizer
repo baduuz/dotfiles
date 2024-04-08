@@ -1,28 +1,30 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
-if [[ $# -eq 1 ]]; then
-    selected=$1
+# thanks prime
+# https://github.com/ThePrimeagen/.dotfiles/blob/master/bin/.local/scripts/tmux-sessionizer
+
+if [ $# -gt 1 ];then
+    SELECTED=$1
 else
-    selected=$(find ~/repos ~/.local/src -mindepth 1 -maxdepth 1 -type d | fzf)
+    SELECTED=$(find ~/repos ~/.local/src -mindepth 1 -maxdepth 1 -type d | fzf --prompt='repo:')
 fi
 
-if [[ -z $selected ]]; then
+[ -z "$SELECTED" ] && exit 0
+
+SELECTED_NAME=$(basename "$SELECTED" | tr . _)
+TMUX_RUNNING=$(pgrep tmux)
+
+if [ -z "$TMUX_RUNNING" ];then
+    tmux new-session -s "$SELECTED_NAME" -c "$SELECTED"
     exit 0
 fi
 
-selected_name=$(basename "$selected" | tr . _)
-tmux_running=$(pgrep tmux)
-
-if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
-    tmux new-session -s $selected_name -c $selected
-    exit 0
-elif [[ -z $TMUX ]]; then
-    tmux attach-session -t $selected_name
-    exit 0
+if ! tmux has-session -t "$SELECTED_NAME" 2> /dev/null; then
+    tmux new-session -ds "$SELECTED_NAME" -c "$SELECTED"
 fi
 
-if ! tmux has-session -t=$selected_name 2> /dev/null; then
-    tmux new-session -ds $selected_name -c $selected
+if [ -z "$TMUX" ];then
+    tmux attach-session -t "$SELECTED_NAME"
+else
+    tmux switch-client -t "$SELECTED_NAME"
 fi
-
-tmux switch-client -t $selected_name

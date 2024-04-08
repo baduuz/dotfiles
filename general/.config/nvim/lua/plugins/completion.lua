@@ -48,8 +48,12 @@ return {
             sources = cmp.config.sources {
                 { name = 'nvim_lsp' },
                 { name = 'luasnip' },
-                { name = 'buffer' },
                 { name = 'path' },
+                { name = 'buffer', keyword_length = 4 },
+            },
+
+            experimental = {
+                ghost_text = true,
             },
         }
     end,

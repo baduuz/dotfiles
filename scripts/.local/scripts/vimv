@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# from https://github.com/thameera/vimv
+# credit goes to https://github.com/thameera/vimv
 set -eu
 
 # Lists the current directory's files in Vim, so you can edit it and save to rename them

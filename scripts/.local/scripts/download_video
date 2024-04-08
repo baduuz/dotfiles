@@ -1,5 +1,0 @@
-#!/bin/sh
-
-FILENAME=$(yt-dlp --get-filename "$1" -f bestvideo+bestaudio -o '%(title)s.%(ext)s')
-
-([ "$FILENAME" != '' ] && notify-send 'Started video download' "$FILENAME" && yt-dlp --add-metadata --geo-bypass -i "$1" -f bestvideo+bestaudio -o "$HOME/Videos/%(title)s" && echo "$HOME/Videos/$FILENAME" >> .config/bookmarks && notify-send 'Succesfully downloaded' "$FILENAME") || notify-send 'Download failed' "$1"

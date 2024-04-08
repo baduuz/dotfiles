@@ -2,10 +2,12 @@
 
 BACKGROUND_FILE="$XDG_CONFIG_HOME/wall"
 WALLPAPER_FOLDER="$HOME/Pictures/Wallpaper"
-FILE="$(sxiv -t $WALLPAPER_FOLDER -r -o | head -n1)"
+
+FILE="$(sxiv -t "$WALLPAPER_FOLDER" -r -o | head -n1)"
+[ -z "$FILE" ] && exit 0
 MONITOR="$(hyprctl monitors | awk '/Monitor/ {print $2}' | head -n1)"
+[ -z "$MONITOR" ] && exit 1
+
 ln -sf "$FILE" "$BACKGROUND_FILE"
-echo file: "$FILE"
-echo monitor: "$MONITOR"
 hyprctl hyprpaper preload "$BACKGROUND_FILE"
 hyprctl hyprpaper wallpaper "$MONITOR,$BACKGROUND_FILE"

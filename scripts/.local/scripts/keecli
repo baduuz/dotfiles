@@ -1,5 +1,0 @@
-#!/bin/sh
-
-DATABASE=~/Documents/Private/keepass.kdbx
-
-keepassxc-cli show "$DATABASE" $1 | awk '/Password/ {print $2}'
