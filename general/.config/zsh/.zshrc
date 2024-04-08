@@ -51,15 +51,6 @@ zle -N zle-line-init
 echo -ne '\e[5 q' # Use beam shape cursor on startup.
 preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
 
-export REFER="$HOME/Documents/Wiki/bib.ref"
-
-vicd() {
-	dst="$(vifm --choose-dir - . .)"
-	if [ -z "$dst" ];then
-	fi
-	cd "$dst"
-}
-
 alias rm="rm -iv"
 alias mv="mv -iv"
 alias cp="cp -iv"
@@ -67,11 +58,9 @@ alias grep="grep --color=auto"
 alias ls="ls --color=auto"
 alias ll="ls -Ahl"
 alias v="nvim"
-alias ssh="TERM=xterm ssh"
 alias ts="tmux-sessionizer"
-alias ta="tmux attach"
 
-PROMPT='%F{blue}%1~ %(?.%F{green}.%F{red})λ %f'
-PROMPT2='%F{yellow}❯ %f'
+PROMPT='%F{blue}%~ %(?.%F{green}.%F{red})$ %f'
+PROMPT2='%F{yellow}> %f'
 
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
