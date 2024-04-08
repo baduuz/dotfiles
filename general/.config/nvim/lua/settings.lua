@@ -41,7 +41,7 @@ vim.g.netrw_browse_split = 4
 vim.g.netrw_winsize = 25
 
 -- Misc
-vim.opt.mouse = ''
+vim.opt.mouse = 'n'
 vim.opt.updatetime = 50
 vim.opt.splitright = true
 vim.opt.splitbelow = true
