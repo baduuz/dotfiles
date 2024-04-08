@@ -21,9 +21,9 @@ VOLUME="$(get_volume)"
 [ "$VOLUME" -gt "$MAX_VOLUME" ] && pactl set-sink-volume @DEFAULT_SINK@ "$MAX_VOLUME"% && VOLUME="$MAX_VOLUME"
 
 if [ "$(pactl get-sink-mute @DEFAULT_SINK@)" = 'Mute: yes' ];then
-    IS_MUTE=''
-else
     IS_MUTE=' (muted)'
+else
+    IS_MUTE=''
 fi
 
 notify-send -u low "Volume $VOLUME%$IS_MUTE" -h "int:value:$VOLUME" -h 'string:x-canonical-private-synchronous:volume-notification' --transient

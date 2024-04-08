@@ -1,0 +1,88 @@
+@define-color bg-color #181616;
+@define-color light-bg-color #a6a69c;
+@define-color fg-color #c8c093;
+@define-color highlight-color #8ba4b0;
+@define-color urgent-color #c4746e;
+
+
+* {
+    font-family: sans-serif;
+    font-size: 13px;
+    color: @fg-color;
+}
+
+window#waybar {
+    background-color: @bg-color;
+}
+
+button {
+    border: none;
+    border-radius: 0;
+}
+
+button:hover {
+    background: inherit;
+}
+
+#workspaces button {
+    padding: 0 5px;
+}
+
+#workspaces button:hover {
+    box-shadow: inset 0 -3px @highlight-color;
+}
+
+#workspaces button.active {
+    box-shadow: inset 0 -3px @highlight-color;
+}
+
+#workspaces button.urgent {
+    background-color: @urgent-color;
+}
+
+#clock,
+#battery,
+#cpu,
+#memory,
+#disk,
+#temperature,
+#backlight,
+#network,
+#pulseaudio,
+#wireplumber,
+#custom-media,
+#tray,
+#mode,
+#idle_inhibitor,
+#scratchpad,
+#mpd {
+    padding: 0 10px;
+}
+
+#window,
+#workspaces {
+    margin: 0 4px;
+}
+
+/* If workspaces is the leftmost module, omit left margin */
+.modules-left > widget:first-child > #workspaces {
+    margin-left: 0;
+}
+
+/* If workspaces is the rightmost module, omit right margin */
+.modules-right > widget:last-child > #workspaces {
+    margin-right: 0;
+}
+
+#pulseaudio.muted {
+    color: @light-bg-color;
+}
+
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+    background-color: @urgent-color;
+}
