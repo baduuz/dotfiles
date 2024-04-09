@@ -20,6 +20,6 @@ vim.keymap.set('n', '<leader>pv', vim.cmd.Lex)
 
 -- Diagnostics
 vim.keymap.set('n', '[f', vim.diagnostic.open_float)
-vim.keymap.set('n', '[F', vim.diagnostic.setloclist)
+vim.keymap.set('n', '<leader>pd', vim.diagnostic.setloclist)
 vim.keymap.set('n', '[d', vim.diagnostic.goto_next)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_prev)
