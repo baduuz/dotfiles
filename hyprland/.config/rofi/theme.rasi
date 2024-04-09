@@ -1,13 +1,13 @@
 // Variables
 * {
 	background:   #181616;
-	selected:     #3c3836a0;
-	foreground:   #ebdbb2;
-	gray:         #a89984;
+	selected:     #1F1F28;
+	foreground:   #c8c093;
+	gray:         #727169;
 
-	highlight:    #83a598;
-	urgent:       #cc241d;
-	active:       #98971a;
+	highlight:    #8ba4b0;
+	urgent:       #c4746e;
+	active:       #8ba4b0;
 
 	radius:       10px;
 	border-width: 2px;
