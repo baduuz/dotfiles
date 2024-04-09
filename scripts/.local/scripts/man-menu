@@ -1,0 +1,8 @@
+#!/bin/sh
+
+SELECTED="$(man -k . | awk '// { print $1" "$2 }' | fzf)"
+[ -z "$SELECTED" ] && exit 0
+
+NAME="$(echo "$SELECTED" | awk '// { print $1 }')"
+SECTION="$(echo "$SELECTED" | awk '// {print $2 }' | tr -d '()')"
+man "$SECTION" "$NAME"

@@ -9,7 +9,7 @@ configuration {
 	display-drun: " ";
 	drun-match-fields: [name,generic,categories,keywords];
 
-	display-run: "";
-}
+        display-run: "";
+    }
 
-@theme "theme"
+    @theme "theme"
