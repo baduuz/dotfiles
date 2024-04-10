@@ -3,11 +3,17 @@
 BACKGROUND_FILE="$XDG_CONFIG_HOME/wall"
 WALLPAPER_FOLDER="$HOME/Pictures/Wallpaper"
 
-FILE="$(sxiv -t "$WALLPAPER_FOLDER" -r -o | head -n1)"
-[ -z "$FILE" ] && exit 0
+if [ "$#" -ge 1 ];then
+    FILE="$(readlink -f "$1")"
+else
+    FILE="$(sxiv -t "$WALLPAPER_FOLDER" -r -o | head -n1)"
+fi
+[ -f "$FILE" ] || exit 1
+
 MONITOR="$(hyprctl monitors | awk '/Monitor/ {print $2}' | head -n1)"
 [ -z "$MONITOR" ] && exit 1
 
+
 ln -sf "$FILE" "$BACKGROUND_FILE"
-hyprctl hyprpaper preload "$BACKGROUND_FILE"
-hyprctl hyprpaper wallpaper "$MONITOR,$BACKGROUND_FILE"
+hyprctl hyprpaper preload "$FILE"
+hyprctl hyprpaper wallpaper "$MONITOR,$FILE"

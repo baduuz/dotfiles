@@ -8,6 +8,8 @@ return {
             java = { 'checkstyle' },
         }
 
+        lint.linters.checkstyle.config_file = 'checkstyle.xml'
+
         vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWritePost', 'InsertLeave' }, {
             group = vim.api.nvim_create_augroup('LintGroup', {}),
             callback = function() lint.try_lint() end,

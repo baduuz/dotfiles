@@ -1,9 +1,10 @@
 #!/bin/sh
 
-CONFIGURATIONS="general scripts hyprland"
+CONFIGURATIONS='general scripts hyprland'
 
 if [ "$1" = "clean" ];then
-    stow -v --target="$HOME" --delete */
+    stow -v --target="$HOME" --delete ./*/
 else
+    # shellcheck disable=SC2086
     stow -v --target="$HOME" --restow $CONFIGURATIONS
 fi

@@ -1,0 +1,8 @@
+[options]
+overlay = true
+overlay_font = sans-serif:10
+
+[binds]
+n = next
+p = prev
+<Shift+W> = exec wallpaper-menu "$imv_current_file"
