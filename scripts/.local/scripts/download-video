@@ -2,13 +2,10 @@
 
 [ "$#" -lt 1 ] && exit 1
 
-FILENAME=$(yt-dlp --get-filename "$1" -f bestvideo+bestaudio -o '%(title)s')
-[ -z "$FILENAME" ] && exit 1
-
-notify-send 'Download started' "$FILENAME"
+notify-send 'Download started' "$1"
 
 if yt-dlp --add-metadata --geo-bypass -i "$1" -f bestvideo+bestaudio -o "$HOME/Videos/%(title)s";then
-    notify-send 'Download finished' "$FILENAME"
+    notify-send 'Download finished' "$1"
 else
-    notify-send 'Download failed' "$FILENAME"
+    notify-send 'Download failed' "$1"
 fi

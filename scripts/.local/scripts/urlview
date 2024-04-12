@@ -8,7 +8,7 @@ METHOD=$(printf 'Browser\nVideo\nDownload Video\nPicture\n' | fzf --prompt='meth
 if [ "$METHOD" = 'Video' ];then
     mpv "$URL"
 elif [ "$METHOD" = 'Download Video' ];then
-    download-video "$URL"
+    setsid download-video "$URL" >/dev/null 2>/dev/null
 elif [ "$METHOD" = 'Browser' ];then
     $BROWSER "$URL"
 elif [ "$METHOD" = 'Picture' ];then
