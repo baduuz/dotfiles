@@ -26,6 +26,9 @@ bindkey '^e' edit-command-line
 bindkey -M vicmd "^e" edit-command-line
 
 # looks and prompt
+preexec()  {
+    echo -ne '\e[1 q'
+}
 autoload -U colors && colors
 autoload -Uz vcs_info # Git integration
 precmd() { vcs_info }
