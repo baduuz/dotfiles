@@ -25,6 +25,7 @@ vim.opt.swapfile = false
 vim.opt.undofile = true
 
 -- Some visual stuff
+vim.opt.guicursor = ''
 vim.opt.termguicolors = true
 vim.opt.cmdheight = 2
 vim.opt.cursorline = true
