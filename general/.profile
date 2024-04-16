@@ -17,7 +17,7 @@ export GNUPGHOME="$XDG_DATA_HOME"/gnupg
 export CARGO_HOME="$XDG_CACHE_HOME"/cargo
 export RUSTUP_HOME="$XDG_DATA_HOME"/rustup
 export KDEHOME="$XDG_CONFIG_HOME"/kde
-export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME"/java
+export _JAVA_OPTIONS="-Djava.util.prefs.userRoot=$XDG_CONFIG_HOME/java -Djavafx.cachedir="$XDG_CACHE_HOME"/openjfx"
 export TEXMFHOME="$XDG_DATA_HOME/texmf"
 export TEXMFVAR="$XDG_CACHE_HOME/texlive/texmf-var"
 export TEXMFCONFIG="$XDG_CONFIG_HOME/texlive/texmf-config"
