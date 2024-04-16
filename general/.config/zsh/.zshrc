@@ -26,9 +26,7 @@ bindkey '^e' edit-command-line
 bindkey -M vicmd "^e" edit-command-line
 
 # looks and prompt
-preexec()  {
-    echo -ne '\e[1 q'
-}
+preexec()  { echo -ne '\e[1 q' } # block cursor
 autoload -U colors && colors
 autoload -Uz vcs_info # Git integration
 precmd() { vcs_info }
