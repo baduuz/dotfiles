@@ -1,0 +1,18 @@
+#!/bin/sh
+
+# Pretty man pages
+export LESS_TERMCAP_mb=$(tput bold; tput setaf 2) # green
+export LESS_TERMCAP_md=$(tput bold; tput setaf 2) # green
+export LESS_TERMCAP_so=$(tput bold; tput setaf 2) # yellow
+export LESS_TERMCAP_se=$(tput rmso; tput sgr0)
+export LESS_TERMCAP_us=$(tput smul; tput bold; tput setaf 1) # red
+export LESS_TERMCAP_ue=$(tput sgr0)
+export LESS_TERMCAP_me=$(tput sgr0)
+
+# Default programs
+export TERMINAL='alacritty'
+export EDITOR='nvim'
+export BROWSER='brave'
+
+# Path
+export PATH="$PATH:$HOME/.local/scripts:$HOME/.local/bin"

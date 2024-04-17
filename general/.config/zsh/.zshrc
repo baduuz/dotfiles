@@ -26,7 +26,7 @@ bindkey '^e' edit-command-line
 bindkey -M vicmd "^e" edit-command-line
 
 # looks and prompt
-preexec()  { echo -ne '\e[1 q' } # block cursor
+preexec()  { printf '\e[1 q' } # block cursor
 autoload -U colors && colors
 autoload -Uz vcs_info # Git integration
 precmd() { vcs_info }
@@ -36,10 +36,10 @@ setopt PROMPT_SUBST
 PROMPT='%F{blue}%~%F{yellow}${vcs_info_msg_0_}%(?.%F{green}.%F{red}) $ %f'
 PROMPT2='%F{yellow}> %f'
 
-[ -e "$XDG_CONFIG_HOME/shell/aliases.sh" ] && source "$XDG_CONFIG_HOME/shell/aliases.sh"
-[ -e "$XDG_CONFIG_HOME/shell/exports.sh" ] && source "$XDG_CONFIG_HOME/shell/exports.sh"
+[ -e "$XDG_CONFIG_HOME/shell/aliases" ] && source "$XDG_CONFIG_HOME/shell/aliases"
+[ -e "$XDG_CONFIG_HOME/shell/exports" ] && source "$XDG_CONFIG_HOME/shell/exports"
 
 if [ -e /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ];then
     source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh  2>/dev/null
 fi
-eval "$(fzf --zsh)"
+command -v 'fzf' >/dev/null  && eval "$(fzf --zsh)"
