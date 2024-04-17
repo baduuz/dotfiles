@@ -3,22 +3,22 @@ import = [
 ]
 
 [font]
-size = 9.75
+size = 9.5
 
 [font.bold]
-family = "Fira Code"
+family = "JetBrains Mono"
 style = "Bold"
 
 [font.bold_italic]
-family = "Fira Code"
+family = "JetBrains Mono"
 style = "Bold Italic"
 
 [font.italic]
-family = "Fira Code"
+family = "JetBrains Mono"
 style = "Italic"
 
 [font.normal]
-family = "Fira Code"
+family = "JetBrains Mono"
 style = "Regular"
 
 
