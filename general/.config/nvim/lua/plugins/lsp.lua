@@ -39,7 +39,6 @@ return {
             lua_ls = {},
             jdtls = {},
             clangd = {},
-            marksman = {},
         }
 
         for server, config in pairs(servers) do
