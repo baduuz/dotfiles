@@ -6,7 +6,7 @@ WALLPAPER_FOLDER="$HOME/Pictures/Wallpaper"
 if [ "$#" -ge 1 ];then
     FILE="$(readlink -f "$1")"
 else
-    FILE="$(sxiv -t "$WALLPAPER_FOLDER" -r -o | head -n1)"
+    imv -r "$WALLPAPER_FOLDER"
 fi
 [ -f "$FILE" ] || exit 1
 
