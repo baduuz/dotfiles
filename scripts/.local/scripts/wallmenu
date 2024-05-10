@@ -15,9 +15,11 @@ MONITOR="$(hyprctl monitors | awk '/Monitor/ {print $2}' | head -n1)"
 
 
 ln -sf "$FILE" "$BACKGROUND_FILE"
-if [ -z "$WAYLAND_DISPLAY" ];then
+if [ -n "$WAYLAND_DISPLAY" ];then
     hyprctl hyprpaper preload "$FILE"
     hyprctl hyprpaper wallpaper "$MONITOR,$FILE"
-elif [ -z "$DISPLAY" ];then
+elif [ -n "$DISPLAY" ];then
     xwallpaper --zoom "$FILE"
+else
+    echo "Could not set wallpaper" >&2
 fi

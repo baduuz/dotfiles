@@ -5,4 +5,4 @@ overlay_font = sans-serif:10
 [binds]
 n = next
 p = prev
-<Shift+W> = exec hyprwall "$imv_current_file"
+<Shift+W> = exec wallmenu "$imv_current_file"
