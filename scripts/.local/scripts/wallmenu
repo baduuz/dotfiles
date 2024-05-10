@@ -15,5 +15,9 @@ MONITOR="$(hyprctl monitors | awk '/Monitor/ {print $2}' | head -n1)"
 
 
 ln -sf "$FILE" "$BACKGROUND_FILE"
-hyprctl hyprpaper preload "$FILE"
-hyprctl hyprpaper wallpaper "$MONITOR,$FILE"
+if [ -z "$WAYLAND_DISPLAY" ];then
+    hyprctl hyprpaper preload "$FILE"
+    hyprctl hyprpaper wallpaper "$MONITOR,$FILE"
+elif [ -z "$DISPLAY" ];then
+    xwallpaper --zoom "$FILE"
+fi
