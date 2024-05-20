@@ -39,6 +39,7 @@ return {
             lua_ls = {},
             jdtls = {},
             clangd = {},
+            pylsp = {},
         }
 
         for server, config in pairs(servers) do

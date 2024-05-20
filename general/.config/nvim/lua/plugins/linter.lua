@@ -6,6 +6,7 @@ return {
         lint.linters_by_ft = {
             sh = { 'shellcheck' },
             java = { 'checkstyle' },
+            python = { 'ruff' },
         }
 
         lint.linters.checkstyle.config_file = 'checkstyle.xml'
