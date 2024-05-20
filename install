@@ -1,6 +1,6 @@
 #!/bin/sh
 
-CONFIGURATIONS='general scripts hyprland'
+CONFIGURATIONS='general scripts hyprland neovim zsh tmux'
 
 if [ "$1" = "clean" ];then
     stow -v --target="$HOME" --delete ./*/
