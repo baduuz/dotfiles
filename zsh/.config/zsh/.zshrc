@@ -1,11 +1,6 @@
 # Don't do anything else if not interactive
 [[ $- != *i* ]] && return
 
-# History
-HISTSIZE=1000
-SAVEHIST=1000
-HISTFILE="$XDG_CACHE_HOME"/zsh/history
-
 # Completions
 autoload -U compinit
 zstyle ':completion:*' menu select

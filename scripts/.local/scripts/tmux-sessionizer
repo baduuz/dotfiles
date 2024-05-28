@@ -3,7 +3,7 @@
 # thanks prime
 # https://github.com/ThePrimeagen/.dotfiles/blob/master/bin/.local/scripts/tmux-sessionizer
 
-if [ $# -gt 1 ];then
+if [ $# -ge 1 ];then
     SELECTED=$1
 else
     SELECTED=$(find ~/repos ~/.local/src -mindepth 1 -maxdepth 1 -type d | fzf --prompt='repo:')

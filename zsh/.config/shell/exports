@@ -15,4 +15,4 @@ export EDITOR='nvim'
 export BROWSER='brave'
 
 # Path
-export PATH="$PATH:$HOME/.local/scripts:$HOME/.local/bin"
+export PATH="$PATH:$HOME/.local/scripts:$HOME/.local/bin:$HOME/.local/share/go/bin"

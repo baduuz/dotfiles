@@ -30,6 +30,8 @@ export PYTHONPYCACHEPREFIX="$XDG_CACHE_HOME/python"
 export PYTHONUSERBASE="$XDG_DATA_HOME/python"
 export XAUTHORITY="$XDG_RUNTIME_DIR/Xauthority"
 export QT_QPA_PLATFORMTHEME='qt5ct'
+export GOPATH="$XDG_DATA_HOME/go"
+export GOMODCACHE="$XDG_CACHE_HOME/go/mod"
 alias nvidia-settings='nvidia-settings --config=$XDG_CONFIG_HOME/nvidia/settings'
 
 export LANG='en_US.UTF-8'

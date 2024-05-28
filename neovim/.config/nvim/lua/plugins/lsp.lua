@@ -39,6 +39,8 @@ return {
             lua_ls = {},
             jdtls = {},
             clangd = {},
+            gopls = {},
+            templ = {},
             pyright = {},
         }
 
