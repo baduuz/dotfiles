@@ -1,12 +1,7 @@
 return {
     'neovim/nvim-lspconfig',
-    dependencies = {
-        'williamboman/mason.nvim',
-    },
 
     config = function()
-        require('mason').setup()
-
         vim.api.nvim_create_autocmd('LspAttach', {
             group = vim.api.nvim_create_augroup('LspGroup', {}),
             pattern = '*',
@@ -36,12 +31,12 @@ return {
 
         local servers = {
             zls = {},
-            lua_ls = {},
-            jdtls = {},
+            lua_ls = { settings = { Lua = { diagnostics = { globals = { 'vim' } } } } },
             clangd = {},
             gopls = {},
             templ = {},
-            pyright = {},
+            ocamllsp = {},
+            rust_analyzer = {},
         }
 
         for server, config in pairs(servers) do

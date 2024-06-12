@@ -38,3 +38,4 @@ if [ -e /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.z
     source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh  2>/dev/null
 fi
 command -v 'fzf' >/dev/null  && eval "$(fzf --zsh)"
+eval $(opam env)
