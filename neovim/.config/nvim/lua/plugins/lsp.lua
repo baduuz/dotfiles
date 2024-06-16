@@ -20,6 +20,9 @@ return {
                 map('n', '<leader>br', vim.lsp.buf.rename)
                 map('n', '<leader>ba', vim.lsp.buf.code_action)
                 map('n', '<leader>bf', vim.lsp.buf.format)
+                map('n', '<c-s>', function()
+                    vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+                end)
                 map('i', '<c-s>', vim.lsp.buf.signature_help)
             end
         })
@@ -40,8 +43,12 @@ return {
         }
 
         for server, config in pairs(servers) do
-            config = vim.tbl_deep_extend('force', { capabilities = capabilities }, config)
-            lspconfig[server].setup(config)
+            local cmd = lspconfig[server].document_config.default_config.cmd[1]
+            -- only add ls if it is found
+            if vim.fn.executable(cmd) == 1 then
+                config = vim.tbl_deep_extend('force', { capabilities = capabilities }, config)
+                lspconfig[server].setup(config)
+            end
         end
     end,
 }

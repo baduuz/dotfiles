@@ -3,7 +3,7 @@
 CONFIGURATIONS='general scripts hyprland neovim zsh tmux'
 
 if [ "$1" = "clean" ];then
-    stow -v --target="$HOME" --delete ./*/
+    stow -v --target="$HOME" --delete $CONFIGURATIONS
 else
     # shellcheck disable=SC2086
     stow -v --target="$HOME" --restow $CONFIGURATIONS
